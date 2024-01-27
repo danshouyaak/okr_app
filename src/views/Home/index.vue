@@ -16,9 +16,9 @@
 
 
 <script setup>
-import left from "../../views/left/index.vue"
-import center from "../../views/center/index.vue"
-import right from "../../views/right/index.vue"
+import left from "./left/index.vue"
+import center from "./center/index.vue"
+import right from "./right/index.vue"
 </script>
 <script>
 export default {

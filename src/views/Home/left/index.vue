@@ -1,12 +1,12 @@
 <template>
     <div>
-        <img src="../../assets/list.png" style="display: flex;margin: 2% 0 0 5%;">
+        <img src="../../../assets/list.png" style="display: flex;margin: 2% 0 0 5%;">
         <h2 style="text-align: left; margin-left: 4%;">
             Vision
         </h2>
         <div style="display: flex;justify-content: center;">
             <div class="abstract">
-                <img src="../../assets/zhaiyao.png" width="30px" height="30px">
+                <img src="../../../assets/zhaiyao.png" width="30px" height="30px">
                 <span>摘要</span>
             </div>
         </div>
@@ -15,20 +15,20 @@
             <div style="text-align: center;">我是中间内容</div>
             <div style="text-align: center;">我是中间内容</div>
             <div style="text-align: center;">我是中间内容</div>
+            
         </div>
         <div>
             <div class="button">
-                <img src="../../assets/setting.png" alt="" srcset="">
-                <span>+</span>
+                <img src="../../../assets/setting.png" alt="" srcset="">
+                <!-- <span>+</span> -->
+                <Dialog></Dialog>
             </div>
         </div>
     </div>
 </template>
 
-<script>
-export default {
-
-}
+<script setup>
+import Dialog from "../../../components/Dialog/index.vue"
 </script>
 
 <style lang="scss" scoped>
@@ -54,6 +54,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     span {
         font-size: 40px;
         color: blue;

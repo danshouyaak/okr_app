@@ -4,7 +4,7 @@
             <h4>目标示例：ios应用开发入门</h4>
             <div>
                 <span>复盘</span>
-                <img src="../../assets/edit.png">
+                <img src="../../../assets/edit.png">
             </div>
         </div>
     </div>

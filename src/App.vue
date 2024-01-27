@@ -4,7 +4,7 @@
   </div>
 </template>
 <script setup>
-import Home from './components/Home/index.vue';
+import Home from './views/Home/index.vue';
 </script>
 
 <style lang="scss" scoped>
