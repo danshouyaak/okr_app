@@ -2,7 +2,7 @@
     <span @click="visible = true" class="span">
         +
     </span>
-    <el-dialog v-model="visible" :show-close="false">
+    <el-dialog v-model="visible" :show-close="false" >
         <template #header="{ close, titleId, titleClass }">
             <div class="my-header">
                 <div>编辑目标</div>
@@ -17,21 +17,16 @@
                 </div>
             </div>
             <div class="content-one" v-if="tabIndex == 0">
-                <div>
-                    <span>提高身体素质</span>
-                    <!-- <input type="radio"> -->
-                    <input type="radio" name="radioGroup" :checked="radioValue" @click="radioCheck">
-                </div>
+                <!-- <span>提高身体素质</span> -->
+                <!-- <input type="radio"> -->
+                <!-- <input type="radio" name="radioGroup" :checked="radioValue" @click="radioCheck"> -->
+                <Item1></Item1>
             </div>
             <div class="content-two" style="color: black;margin-top: 8%;" v-if="tabIndex == 1">
-                <div>
-                    我是关键结果
-                </div>
+                <Item2></Item2>
             </div>
             <div class="content-three" style="color: black;margin-top: 8%; " v-if="tabIndex == 2">
-                <div>
-                    我是动机&可行性
-                </div>
+                <Item3></Item3>
             </div>
         </template>
         This is dialog content.
@@ -41,6 +36,9 @@
 <script  setup>
 import { ref } from 'vue'
 import { ElButton, ElDialog } from 'element-plus'
+import Item1 from "./Item1/item1.vue"
+import Item2 from "./Item2/item2.vue"
+import Item3 from "./Item3/item3.vue"
 
 const visible = ref(false)
 const radioValue = ref(false)
@@ -112,19 +110,21 @@ function radioCheck() {
 }
 
 .content-one {
-    color: black;
-    margin-top: 8%;
-    div:first-child{
+    /* color: black;
+    margin-top: 8%; */
+
+    /* div:first-child {
         display: flex;
         justify-content: space-between;
         background-color: gray;
         padding: 2%;
         border-radius: 10px;
-        span{
+
+        span {
             font-size: 15px;
             font-weight: bolder;
             color: rgba(245, 245, 245, 0.705);
         }
-    }
+    } */
 }
 </style>

@@ -21,7 +21,7 @@
             <div class="button">
                 <img src="../../../assets/setting.png" alt="" srcset="">
                 <!-- <span>+</span> -->
-                <Dialog></Dialog>
+                <Dialog ></Dialog>
             </div>
         </div>
     </div>
