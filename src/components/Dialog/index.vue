@@ -29,7 +29,7 @@
                 <Item3></Item3>
             </div>
         </template>
-        This is dialog content.
+    
     </el-dialog>
 </template>
   
