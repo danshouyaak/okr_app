@@ -14,7 +14,7 @@ export default {
 
 <style lang="scss" scoped>
 .scrollable-div {
-    height: 500px;
+    height: 350px;
     /* 设置div的高度 */
     overflow: auto;
     /* 当内容溢出时显示滚动条 */
