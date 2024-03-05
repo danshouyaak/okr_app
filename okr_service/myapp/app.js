@@ -7,6 +7,12 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+var testRouter = require('./routes/test')
+var loginRouter = require('./routes/login')
+
+const bodyParser = require('body-parser');
+
+
 var app = express();
 
 // view engine setup
@@ -19,8 +25,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// 解析application/json类型的数据
+app.use(bodyParser.json());
+
+// 解析application/x-www-form-urlencoded类型的数据
+app.use(bodyParser.urlencoded({extended: false}));
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+app.use('/test', testRouter)
+app.use('/admin', loginRouter)
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
