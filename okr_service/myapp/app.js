@@ -10,8 +10,6 @@ var usersRouter = require('./routes/users');
 var testRouter = require('./routes/test')
 var loginRouter = require('./routes/login')
 
-const bodyParser = require('body-parser');
-
 
 var app = express();
 
