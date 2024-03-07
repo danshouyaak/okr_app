@@ -1,17 +1,11 @@
-const pool = require('../../Api/mysql/sql')
-module.exports = (req, res) => {
-    let sql = "select * from okr_user";
-    pool.getConnection((err, connection) => {
-        if (err) throw err;
-        connection.query(sql, (err, result, fields) => {
-            connection.release();
-            if (err) throw err;
-            let ApiRes = {
-                code: 200,
-                msg: "成功",
-                data: result,
-            };
-            res.send(ApiRes).status(200);
-        });
+const {User} = require("../../database/model/User");
+module.exports = async (req, res) => {
+    const findAllUserList = await User.findAll();
+    res.status(200).send({
+        meta: {
+            status: 200,
+            msg: "查询成功",
+        },
+        data: findAllUserList,
     });
 };
