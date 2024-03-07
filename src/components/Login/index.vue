@@ -1,7 +1,13 @@
 <template>
   <el-button plain @click="centerDialogVisible = true"> 点击登录</el-button>
 
-  <el-dialog v-model="centerDialogVisible" title="登录" width="500" center>
+  <el-dialog
+      v-model="centerDialogVisible"
+      @closed="handleClosed"
+      title="登录"
+      width="500"
+      center
+  >
     <span>
       <el-input
           v-model="userName"
@@ -25,10 +31,21 @@
     </template>
   </el-dialog>
 </template>
-<script lang="ts" setup>
+<script setup>
 import {ref} from "vue";
+import {reqGetUserList} from "@/api/index";
 
 const centerDialogVisible = ref(false);
 let userName = ref("");
 let userPwd = ref("");
+
+function handleClosed() {
+  console.log(111);
+  try {
+    const res = reqGetUserList();
+    console.log(res);
+  } catch (error) {
+    console.error("请求失败：", error);
+  }
+}
 </script>
