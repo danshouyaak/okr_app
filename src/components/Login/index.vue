@@ -39,10 +39,11 @@ const centerDialogVisible = ref(false);
 let userName = ref("");
 let userPwd = ref("");
 
-function handleClosed() {
+async function handleClosed() {
   console.log(111);
+  let res = [];
   try {
-    const res = reqGetUserList();
+    res = await reqGetUserList();
     console.log(res);
   } catch (error) {
     console.error("请求失败：", error);
