@@ -1,29 +1,24 @@
 <template>
   <div>
-    <!-- <img
-      src="../../../assets/list.png"
-      style="display: flex; margin: 2% 0 0 5%"
-      @click="login"
-    /> -->
-    <Login></Login>
-
-
+    <div class="login">
+      <Login></Login>
+    </div>
     <h2 style="text-align: left; margin-left: 4%">Vision</h2>
-    <div style="display: flex; justify-content: center">
+    <div class="mid">
       <div class="abstract">
         <img src="../../../assets/zhaiyao.png" width="30px" height="30px" />
         <span>摘要</span>
       </div>
-    </div>
-    <div style="height: 450px">
-      <div style="margin-top: 5%"></div>
+
     </div>
   </div>
   <div>
-    <div class="button">
+    <div class="foot">
       <img src="../../../assets/setting.png" alt="" srcset="" />
       <!-- <span>+</span> -->
+
       <Dialog></Dialog>
+
     </div>
   </div>
 </template>
@@ -35,11 +30,15 @@ import Login from "@/components/Login/index.vue";
 const login = () => {
   console.log("=====");
 };
-
-
 </script>
 
 <style lang="scss" scoped>
+.mid {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+}
 .abstract {
   background-color: rgb(57, 62, 66);
   display: flex;
@@ -57,17 +56,12 @@ const login = () => {
   }
 }
 
-.button {
+.foot {
   width: 100%;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-
-  span {
-    font-size: 40px;
-    color: blue;
-    margin-right: 5%;
-  }
+  align-items: center;
+  margin-top: -5%;
 
   img {
     width: 30px;
@@ -75,6 +69,17 @@ const login = () => {
     margin-left: 5%;
   }
 
+  span {
+    width: 30px;
+    height: 30px;
+    margin-right: 5%;
+  }
+
   z-index: 2;
+}
+
+.login {
+  margin-left: -18%;
+  margin-top: 3%;
 }
 </style>

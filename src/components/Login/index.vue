@@ -1,4 +1,5 @@
 <template>
+  <!-- 头像信息 -->
   <el-row class="demo-avatar demo-basic">
     <el-col :span="12">
       <div class="demo-basic--circle">
@@ -16,12 +17,12 @@
 
   <el-dialog
       v-model="centerDialogVisible"
-      @closed="handleClosed"
+      @closed="handleClosed = false"
       title="登录"
       width="500"
       center
   >
-    <span>
+    <span v-if="!getToken()">
       <el-row :justify="flex">
         <el-input
           v-model="userName"
@@ -37,9 +38,14 @@
         />
       </el-row>
     </span>
-    <template #footer>
+    <template #footer v-if="!getToken()">
       <div class="dialog-footer">
         <el-button type="primary" @click="loginUser"> 确认</el-button>
+      </div>
+    </template>
+    <template v-if="getToken()">
+      <div>
+        <span>用户信息。。。。。。</span>
       </div>
     </template>
   </el-dialog>
@@ -57,7 +63,8 @@ let flex = ref("center");
 
 onMounted(() => {
   if (getToken()) {
-    state.circleUrl = 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png'
+    state.circleUrl =
+        "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png";
   }
 });
 
@@ -99,7 +106,7 @@ const state = reactive({
 });
 const {circleUrl} = toRefs(state);
 </script>
-<style scoped>
+<style scoped lang="scss">
 .demo-basic--circle {
   display: flex;
   justify-content: space-between;

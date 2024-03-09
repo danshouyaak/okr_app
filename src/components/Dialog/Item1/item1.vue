@@ -125,6 +125,7 @@ function enterInp1() {
   }
   getCurrentDate();
   resAdd.push(inp1.value);
+  inp1.value = ''
 }
 
 function radioCheck() {
