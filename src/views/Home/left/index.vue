@@ -6,6 +6,8 @@
       @click="login"
     /> -->
     <Login></Login>
+
+
     <h2 style="text-align: left; margin-left: 4%">Vision</h2>
     <div style="display: flex; justify-content: center">
       <div class="abstract">
@@ -22,19 +24,19 @@
       <img src="../../../assets/setting.png" alt="" srcset="" />
       <!-- <span>+</span> -->
       <Dialog></Dialog>
-
     </div>
-
   </div>
 </template>
 
 <script setup>
 import Dialog from "../../../components/Dialog/index.vue";
-import Login from '@/components/Login/index.vue';
+import Login from "@/components/Login/index.vue";
 
 const login = () => {
-  console.log('=====');
+  console.log("=====");
 };
+
+
 </script>
 
 <style lang="scss" scoped>
