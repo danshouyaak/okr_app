@@ -45,21 +45,28 @@
   </el-dialog>
 </template>
 <script setup>
-import {ref, reactive, toRefs} from "vue";
+import {ref, reactive, toRefs, onMounted} from "vue";
 import {reqUserLogin} from "@/api/index";
 import {ElMessage} from "element-plus";
+import {setToken, getToken} from "@/utils/token";
 
 const centerDialogVisible = ref(false);
 let userName = ref("");
 let userPwd = ref("");
 let flex = ref("center");
 
+onMounted(() => {
+  if (getToken()) {
+    state.circleUrl = 'https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png'
+  }
+});
+
 const loginUser = () => {
   if (!userName.value.trim() || !userPwd.value.trim()) {
-    centerDialogVisible.value = false
-    return
+    centerDialogVisible.value = false;
+    return;
   }
-  login()
+  login();
 };
 
 // 登录请求的函数
@@ -74,15 +81,16 @@ async function login() {
         type: "success",
       });
     }
-    state.circleUrl =
-        "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png";
+
     centerDialogVisible.value = false;
-    console.log(res);
+    // console.log(res);
+    const token = res.data.token;
+    setToken(token);
+    // console.log(token);
   } catch (error) {
     console.error("请求失败：", error);
   }
 }
-
 
 // 头像的图片
 const state = reactive({
