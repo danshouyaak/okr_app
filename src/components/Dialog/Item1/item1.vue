@@ -41,20 +41,20 @@
       <div class="resAdd">
         <div
           style="margin-top: 1%; margin-bottom: 1%"
-          v-for="(item, index) in resAdd"
-          :key="index"
+          v-for="(item, index) in state.resAdd"
+          :key="item.id"
         >
           <div>
             <div class="resAdd-item">
-              <span>{{ item }}</span>
+              <span>{{ item.target_content }}</span>
               <div>
-                <span>{{ curTime }}</span>
-                <button style="outline: none" @click="deleteResItem(index)">
+                <span>{{ item.createdAt.split("T")[0] }}</span>
+                <button style="outline: none" @click="deleteResItem(item.id)">
                   删除
                 </button>
               </div>
             </div>
-            <hr v-if="index !== resAdd.length - 1" />
+            <hr v-if="index !== state.resAdd.length - 1"/>
           </div>
         </div>
       </div>
@@ -101,15 +101,46 @@
       <span>备忘</span>
     </div>
   </div>
+
+  <!-- 确认删除弹窗 -->
+  <!-- <el-button plain @click="dialogVisible = true">
+      Click to open the Dialog
+    </el-button> -->
+
+  <el-dialog
+      v-model="dialogVisible"
+      title="Tips"
+      width="500"
+      :before-close="handleClose"
+  >
+    <span>是否确认删除</span>
+    <template #footer>
+      <div class="dialog-footer">
+        <el-button @click="deleteButton(false)">取消</el-button>
+        <el-button type="primary" @click="deleteButton(true)"> 确认</el-button>
+      </div>
+    </template>
+  </el-dialog>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted } from "vue";
-import { ElMessage } from "element-plus";
+import {ref, reactive, onMounted, onBeforeMount} from "vue";
+import {ElMessage, ElMessageBox} from "element-plus";
 import curDate from "../../Date/index.vue";
+import {reqGetTargetList, reqAddTarget, reqDeleteTarget} from "@/api/index";
+import {getToken} from "@/utils/token";
+
+onBeforeMount(() => {
+  if (getToken()) {
+    getTargetList();
+  }
+});
 
 let inp1 = ref("");
-const resAdd = reactive([]);
+let state = reactive({
+  resAdd: [],
+});
+let id = ref(null);
 const radioValue = ref(false);
 const value1 = ref(true);
 
@@ -123,9 +154,10 @@ function enterInp1() {
     ElMessage.error("请勾选添加按钮！！！");
     return;
   }
-  getCurrentDate();
-  resAdd.push(inp1.value);
-  inp1.value = ''
+  addTarget();
+  getTargetList();
+  inp1.value = "";
+  radioValue.value = false;
 }
 
 function radioCheck() {
@@ -133,13 +165,14 @@ function radioCheck() {
 }
 function handleChange(value) {
   // 技术开启的开关
-  console.log(value);
+  // console.log(value);
   if (value) {
   }
 }
-const deleteResItem = (index) => {
-  // console.log(index);
-  resAdd.splice(index, 1);
+
+const deleteResItem = (deleteId) => {
+  id.value = deleteId;
+  dialogVisible.value = true;
 };
 
 //获取当前日期
@@ -154,6 +187,59 @@ function getCurrentDate() {
   curTime.value = `${year}/${month}/${day} ${hours}:${minutes}`;
 }
 //
+
+// 获取目标列表
+async function getTargetList() {
+  await reqGetTargetList().then((res) => {
+    state.resAdd = res.data;
+  });
+}
+
+// 添加目标
+async function addTarget() {
+  let data = {addValue: inp1.value};
+  let res = await reqAddTarget(data);
+  if (res.meta.status === 200) {
+    ElMessage({
+      message: "添加成功",
+      type: "success",
+    });
+  }
+}
+
+// 根据id删除某一个目标
+async function DeleteTarget(id) {
+  let res = await reqDeleteTarget(id);
+  if (res.meta.status === 200) {
+    ElMessage({
+      message: "删除成功",
+      type: "success",
+    });
+  }
+  return res;
+}
+
+// 删除弹窗
+const dialogVisible = ref(false);
+let deleteButton = (variable) => {
+  if (variable) {
+    DeleteTarget(id.value);
+    getTargetList();
+    dialogVisible.value = false;
+    return;
+  }
+  dialogVisible.value = false;
+  return;
+};
+const handleClose = () => {
+  ElMessageBox.confirm("Are you sure to close this dialog?")
+      .then(() => {
+        done();
+      })
+      .catch(() => {
+        // catch error
+      });
+};
 </script>
 
 <style lang="scss" scoped>

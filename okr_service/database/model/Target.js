@@ -8,4 +8,7 @@ const Target = sequelize.define("okr_target", {
         unique: true, // 约束不能为空格
     },
 });
+Target.sync().then(() => {
+    console.log("同步模型成功");
+});
 module.exports = {Target};

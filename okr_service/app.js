@@ -8,13 +8,16 @@ const jwt = require("jsonwebtoken");
 
 var indexRouter = require("./routes/index");
 
+// 引入 ejs 模板引擎
+const ejs = require('ejs');
+
 var app = express();
 require("./database/init");
 require("./database/model/User");
 
 const cors = require("cors");
 app.use(cors());
-
+app.set('view engine', 'ejs');
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));

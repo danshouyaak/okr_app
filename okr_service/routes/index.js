@@ -16,4 +16,8 @@ router.post("/admin/register", require("./User/register"));
 router.post("/admin/login", require("./User/login"));
 router.get("/admin/getUserList", require("./User/getUserList"));
 
-module.exports = router;
+router.get("/admin/Target/getTargetList", require("./Target/getTargetList"));
+router.get("/admin/Target/addTarget", require("./Target/addTarget"))
+// 根据id进行删除
+router.delete("/admin/Target/deleteTarget/:id", require("./Target/deleteTarget"))
+module.exports = router; 

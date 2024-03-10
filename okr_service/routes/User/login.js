@@ -37,7 +37,7 @@ module.exports = async (req, res) => {
         },
         data: {
             username: findUser.username,
-            token
+            token,
         },
     });
 };
