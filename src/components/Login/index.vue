@@ -23,9 +23,13 @@
       width="1000"
       center
       class="el-dialog"
-      style="display: flex;justify-content: right;height: 500px;"
+      style="display: flex; justify-content: right; height: 500px"
   >
-    <div v-if="!getToken()" class="form-wrapper" style="margin-right: 100px;margin-top: 30px;">
+    <div
+        v-if="!getToken()"
+        class="form-wrapper"
+        style="margin-right: 100px; margin-top: 30px"
+    >
       <div class="header">LOGIN</div>
       <div class="input-wrapper">
         <div class="border-wrapper">
@@ -92,24 +96,18 @@ const loginUser = () => {
 // 登录请求的函数
 async function login() {
   let res = [];
-  try {
-    const data = {username: userName.value, password: userPwd.value};
-    res = await reqUserLogin(data);
-    if (res.meta.status === 200) {
-      ElMessage({
-        message: "登录成功",
-        type: "success",
-      });
-    }
-
-    centerDialogVisible.value = false;
-    // console.log(res);
-    const token = res.data.token;
-    setToken(token);
-    // console.log(token);
-  } catch (error) {
-    console.error("请求失败：", error);
+  const data = {username: userName.value, password: userPwd.value};
+  res = await reqUserLogin(data);
+  if (res.meta.status === 200) {
+    ElMessage({
+      message: "登录成功",
+      type: "success",
+    });
   }
+
+  const token = res.data.token;
+  setToken(token);
+  centerDialogVisible.value = false;
 }
 
 // 头像的图片
