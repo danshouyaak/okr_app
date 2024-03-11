@@ -20,21 +20,20 @@
       v-model="centerDialogVisible"
       @closed="handleClosed = false"
       title="登|录"
-      width="500"
+      width="1000"
       center
       class="el-dialog"
+      style="display: flex;justify-content: right;height: 500px;"
   >
-    <div v-if="!getToken()" class="form-wrapper">
+    <div v-if="!getToken()" class="form-wrapper" style="margin-right: 100px;margin-top: 30px;">
       <div class="header">LOGIN</div>
       <div class="input-wrapper">
         <div class="border-wrapper">
           <input
               class="border-item"
               v-model="userName"
-
               placeholder="请输入账号"
               autocomplete="off"
-
           />
         </div>
         <div class="border-wrapper">
@@ -270,6 +269,5 @@ body {
 }
 
 .border-item {
-
 }
 </style>
