@@ -1,7 +1,18 @@
 const jwt = require("jsonwebtoken");
+const md5 = require("../../utils/md5");
 const {User} = require("../../database/model/User");
+
 module.exports = async (req, res) => {
-    const {username, password} = req.body;
+    let username = req.body.username;
+    let password = req.body.password;
+    //   const { username, password } = req.body;
+
+    const md5Password = md5(password);
+    console.log("md5Password1", md5Password);
+
+    //   console.log(username, password1);
+    password = md5Password;
+
     const findUser = await User.findOne({where: {username}});
     if (!findUser) {
         res.status(400).send({
@@ -13,9 +24,11 @@ module.exports = async (req, res) => {
         });
         return;
     }
+    //   console.log('findUser.password',findUser.password);
 
     //   判断账号密码是否正确
     if (username !== findUser.username || password !== findUser.password) {
+        // console.log(findUser.password);
         res.status(400).send({
             meta: {
                 msg: "账号或密码不正确",
