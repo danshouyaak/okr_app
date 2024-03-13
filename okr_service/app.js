@@ -5,6 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
+const isToken = require("./utils/isToken")
 
 var indexRouter = require("./routes/index");
 
@@ -23,6 +24,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+// app.use(isToken)
 
 // 解析application/json类型的数据
 app.use(bodyParser.json());
@@ -44,37 +46,37 @@ app.all('*', function (req, res, next) {
     /*让options请求快速返回*/ else next()
 })
 
+app.use("/admin", isToken)
+// app.use("/admin", (req, res, next) => {
+//     // 判断是否是 注册接口 或 登陆接口 如果是 直接放行
+//     if (req.url === "/login" || req.url === "/register") {
+//         next();
+//         // console.log(req.url);
+//         return;
+//     }
+//     // 接收客户端传递过来的 token
+//     const token = String(req.headers.authorization);
+//     // 根据 客户端传递过来的 token 进行 解密，解密成功返回一个对象，解密失败直接返回 null
 
-app.use("/admin", (req, res, next) => {
-    // 判断是否是 注册接口 或 登陆接口 如果是 直接放行
-    if (req.url === "/login" || req.url === "/register") {
-        next();
-        console.log(req.url);
-        return;
-    }
-    // 接收客户端传递过来的 token
-    const token = String(req.headers.authorization);
-    // 根据 客户端传递过来的 token 进行 解密，解密成功返回一个对象，解密失败直接返回 null
+//     // 第一个参数是 token 第二个是 私钥 自己定义
+//     const username = jwt.decode(token, "xiaoyucot");
 
-    // 第一个参数是 token 第二个是 私钥 自己定义
-    const username = jwt.decode(token, "xiaoyucot");
-
-    // 判断客户端是否传递了token
-    if (token === "undefined" || username == null) {
-        res.status(400).send({
-            data: null,
-            meta: {
-                username,
-                msg: "token无效",
-                status: 400,
-                token,
-            },
-        });
-        return;
-    }
-    // token 正确 放行
-    next();
-});
+//     // 判断客户端是否传递了token
+//     if (token === "undefined" || username == null) {
+//         res.status(400).send({
+//             data: null,
+//             meta: {
+//                 username,
+//                 msg: "token无效",
+//                 status: 400,
+//                 token,
+//             },
+//         });
+//         return;
+//     }
+//     // token 正确 放行
+//     next();
+// });
 
 app.use("/", indexRouter);
 

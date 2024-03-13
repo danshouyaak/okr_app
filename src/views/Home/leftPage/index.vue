@@ -6,7 +6,7 @@
     <h2 style="text-align: left; margin-left: 4%">Vision</h2>
     <div class="mid">
       <div class="abstract">
-        <img src="../../../assets/zhaiyao.png" width="30px" height="30px" />
+        <img src="../../../assets/zhaiyao.png" width="30px" height="30px"/>
         <span>摘要</span>
       </div>
 
@@ -14,7 +14,7 @@
   </div>
   <div>
     <div class="foot">
-      <img src="../../../assets/setting.png" alt="" srcset="" />
+      <img src="../../../assets/setting.png" alt="" srcset=""/>
       <!-- <span>+</span> -->
 
       <Dialog></Dialog>
@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import Dialog from "../../../components/Dialog/index.vue";
+import Dialog from "@/components/Dialog/index.vue";
 import Login from "@/components/Login/index.vue";
 
 const login = () => {
@@ -39,6 +39,7 @@ const login = () => {
   display: flex;
   justify-content: center;
 }
+
 .abstract {
   background-color: rgb(57, 62, 66);
   display: flex;

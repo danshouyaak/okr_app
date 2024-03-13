@@ -21,14 +21,10 @@ export function httpGet(url, params = {}) {
 
 export function httpPost(url, data = {}) {
     return new Promise((resolve, reject) => {
-        requests
-            .post(url, data)
-            .then((reslut) => {
-                resolve(reslut);
-            })
-            .catch((err) => {
-                reject(err);
-            });
+        // console.log(data);
+        requests.post(url, data).then((reslut) => {
+            resolve(reslut);
+        });
     });
 }
 

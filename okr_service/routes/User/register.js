@@ -1,14 +1,12 @@
 const {User} = require("../../database/model/User");
 const md5 = require("../../utils/md5");
 module.exports = async (req, res) => {
-    //   const { username, password } = req.body;
     let username = req.body.username;
     let password = req.body.password;
 
     //   进行密码加密
     const md5Password = md5(password);
     password = md5Password
-    // console.log(username,password);
 
     // 根据客户端传递过来的用户名 查询数据库中是否存在这个用户名
     // 查询是否唯一

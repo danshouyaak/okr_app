@@ -12,6 +12,8 @@ export const reqGetUserList = () => httpGet("/admin/getUserList");
 
 // 用户登录
 export const reqUserLogin = (data) => httpPost("/admin/login", data);
+// export const reqUserLogin = (data) =>
+//   requests({ url: "/admin/login", method: "post", data });
 
 // 获取 目标列表
 export const reqGetTargetList = () => httpGet("/admin/Target/getTargetList");

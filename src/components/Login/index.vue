@@ -14,8 +14,6 @@
     </el-col>
   </el-row>
 
-  <!-- <el-button plain @click="centerDialogVisible = true"> 点击登录</el-button> -->
-
   <el-dialog
       v-model="centerDialogVisible"
       @closed="handleClosed = false"
@@ -63,6 +61,7 @@
       <div>
         <span>用户信息。。。。。。</span>
       </div>
+      <button class="button" @click="logOut">点击退出</button>
     </template>
   </el-dialog>
 </template>
@@ -71,7 +70,7 @@
 import {ref, reactive, toRefs, onMounted} from "vue";
 import {reqUserLogin} from "@/api/index";
 import {ElMessage} from "element-plus";
-import {setToken, getToken} from "@/utils/token";
+import {setToken, getToken, removeToken} from "@/utils/token";
 
 const centerDialogVisible = ref(false);
 let userName = ref("");
@@ -79,7 +78,7 @@ let userPwd = ref("");
 let flex = ref("center");
 
 onMounted(() => {
-  if (getToken()) {
+  if (isTonken()) {
     state.circleUrl =
         "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png";
   }
@@ -98,16 +97,16 @@ async function login() {
   let res = [];
   const data = {username: userName.value, password: userPwd.value};
   res = await reqUserLogin(data);
-  if (res.meta.status === 200) {
-    ElMessage({
-      message: "登录成功",
-      type: "success",
-    });
-  }
+  console.log(res);
+  ElMessage({
+    message: "登录成功",
+    type: "success",
+  });
 
-  const token = res.data.token;
+  const token = res.data[0].token;
   setToken(token);
   centerDialogVisible.value = false;
+  window.location.reload();
 }
 
 // 头像的图片
@@ -116,6 +115,20 @@ const state = reactive({
       "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
 });
 const {circleUrl} = toRefs(state);
+
+// 判断 是否存在token
+const isTonken = () => {
+  if (getToken()) {
+    return true;
+  }
+  return false;
+};
+
+// 退出登录
+const logOut = () => {
+  removeToken();
+  window.location.reload();
+};
 </script>
 <style lang="scss">
 .el-dialog,
@@ -266,6 +279,21 @@ body {
   background-color: #0e92b3;
 }
 
-.border-item {
+.button {
+  border: none;
+  outline: none;
+  background-color: #6c5ce7;
+  padding: 10px 20px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  border-radius: 5px;
+  transition: all ease 0.1s;
+  box-shadow: 0px 5px 0px 0px #a29bfe;
+}
+
+.button:active {
+  transform: translateY(5px);
+  box-shadow: 0px 0px 0px 0px #a29bfe;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <span @click="visible = true" class="span"> + </span>
-  <el-dialog v-model="visible" :show-close="false">
+  <el-dialog v-model="visible" :show-close="false" width="1000">
     <template #header="{ close, titleId, titleClass }">
       <div class="my-header">
         <div>编辑目标</div>
