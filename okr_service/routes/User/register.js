@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
 
     //   进行密码加密
     const md5Password = md5(password);
-    password = md5Password
+    password = md5Password;
 
     // 根据客户端传递过来的用户名 查询数据库中是否存在这个用户名
     // 查询是否唯一

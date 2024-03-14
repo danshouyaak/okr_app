@@ -55,7 +55,7 @@ module.exports = async (req, res) => {
     // ///////
 
     const token = jwt.sign({userId: findUser.id}, "xiaoyucot", {
-        expiresIn: 60 * 60 * 2, // 授权时效2小时
+        expiresIn: 60 * 60 * 6, // 授权时效6小时
     });
     jwt.verify(token, "xiaoyucot", function (err, decode) {
         let accessToken = decode;

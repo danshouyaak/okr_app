@@ -1,6 +1,6 @@
 const {Target} = require("../../database/model/Target");
 module.exports = async (req, res) => {
-    const userId = (req.decoded.userId);
+    const userId = req.decoded.userId;
     const findAllTargetList = await Target.findAll({
         where: {
             user_id: userId,

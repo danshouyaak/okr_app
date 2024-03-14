@@ -1,10 +1,10 @@
 const {Target} = require("../../database/model/Target");
 module.exports = async (req, res) => {
     let addValue = req.query.addValue;
-    const userId = (req.decoded.userId);
+    const userId = req.decoded.userId;
     let createAddValue = await Target.create({
         target_content: addValue,
-        user_id: userId
+        user_id: userId,
     });
     res.status(200).send({
         data: createAddValue,

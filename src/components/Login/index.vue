@@ -17,7 +17,7 @@
   <el-dialog
       v-model="centerDialogVisible"
       @closed="handleClosed = false"
-      title="登|录"
+      title=""
       width="1000"
       center
       class="el-dialog"
@@ -57,11 +57,8 @@
       </div>
     </div>
 
-    <template v-if="getToken()">
-      <div>
-        <span>用户信息。。。。。。</span>
-      </div>
-      <button class="button" @click="logOut">点击退出</button>
+    <template v-if="getToken()" style="display: flex">
+      <UserInfo></UserInfo>
     </template>
   </el-dialog>
 </template>
@@ -71,6 +68,7 @@ import {ref, reactive, toRefs, onMounted} from "vue";
 import {reqUserLogin} from "@/api/index";
 import {ElMessage} from "element-plus";
 import {setToken, getToken, removeToken} from "@/utils/token";
+import UserInfo from "@/components/UserInfo/index.vue";
 
 const centerDialogVisible = ref(false);
 let userName = ref("");
@@ -125,11 +123,8 @@ const isTonken = () => {
 };
 
 // 退出登录
-const logOut = () => {
-  removeToken();
-  window.location.reload();
-};
 </script>
+<style lang="scss" scoped></style>
 <style lang="scss">
 .el-dialog,
 .el-pager li {
@@ -277,23 +272,5 @@ body {
 
 .form-wrapper .icon-wrapper i:hover {
   background-color: #0e92b3;
-}
-
-.button {
-  border: none;
-  outline: none;
-  background-color: #6c5ce7;
-  padding: 10px 20px;
-  font-size: 12px;
-  font-weight: 700;
-  color: #fff;
-  border-radius: 5px;
-  transition: all ease 0.1s;
-  box-shadow: 0px 5px 0px 0px #a29bfe;
-}
-
-.button:active {
-  transform: translateY(5px);
-  box-shadow: 0px 0px 0px 0px #a29bfe;
 }
 </style>
