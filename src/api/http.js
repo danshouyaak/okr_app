@@ -1,15 +1,15 @@
 // 统一封装get post请求
 
-import axios from "axios";
 import requests from "../utils/request";
 
 // get请求
-export function httpGet(url, params = {}) {
+export function httpGet({url, meth, params = {}}) {
     return new Promise((resolve, reject) => {
-        requests
-            .get(url, {
-                params,
-            })
+        requests({
+            url,
+            meth,
+            params,
+        })
             .then((reslut) => {
                 resolve(reslut);
             })
@@ -19,12 +19,15 @@ export function httpGet(url, params = {}) {
     });
 }
 
-export function httpPost(url, data = {}) {
+export function httpPost({url, method, data = {}}) {
     return new Promise((resolve, reject) => {
-        // console.log(data);
-        requests.post(url, data).then((reslut) => {
-            resolve(reslut);
-        });
+        requests({url, method, data})
+            .then((reslut) => {
+                resolve(reslut);
+            })
+            .catch((err) => {
+                reject(err);
+            });
     });
 }
 

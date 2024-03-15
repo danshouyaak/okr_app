@@ -2,6 +2,9 @@ const {Target} = require("../../database/model/Target");
 module.exports = async (req, res) => {
     let addValue = req.query.addValue;
     const userId = req.decoded.userId;
+    console.log('addValue', addValue);
+    console.log('userId', userId);
+    console.log(req.query);
     let createAddValue = await Target.create({
         target_content: addValue,
         user_id: userId,
