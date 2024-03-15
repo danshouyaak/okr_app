@@ -1,5 +1,7 @@
 <template>
   <!-- 头像信息 -->
+  <!-- @click="centerDialogVisible = true" -->
+  <!--               @click="islogin" -->
   <el-row class="demo-avatar demo-basic">
     <el-col :span="12">
       <div class="demo-basic--circle">
@@ -48,6 +50,7 @@
           />
         </div>
       </div>
+
       <div
           v-if="!getToken()"
           style="text-align: center; background-color: rgba(255, 255, 255, 0)"
@@ -56,7 +59,7 @@
         <div class="btn" @click="loginUser">确认</div>
       </div>
     </div>
-
+    <!-- 登录之后展示的信息 -->
     <template v-if="getToken()" style="display: flex">
       <UserInfo></UserInfo>
     </template>
@@ -69,6 +72,9 @@ import {reqUserLogin} from "@/api/index";
 import {ElMessage} from "element-plus";
 import {setToken, getToken, removeToken} from "@/utils/token";
 import UserInfo from "@/components/UserInfo/index.vue";
+import {useRouter} from 'vue-router'
+
+const router = useRouter()
 
 const centerDialogVisible = ref(false);
 let userName = ref("");
@@ -122,7 +128,20 @@ const isTonken = () => {
   return false;
 };
 
-// 退出登录
+
+// 没登陆 跳转到登录页面
+const islogin = () => {
+
+  if (getToken()) {
+    centerDialogVisible.value = true
+    return
+  }
+  console.log('islogin');
+  router.push({
+    path: '/login'
+  })
+
+}
 </script>
 <style lang="scss" scoped></style>
 <style lang="scss">

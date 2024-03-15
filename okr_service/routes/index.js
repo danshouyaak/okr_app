@@ -31,4 +31,6 @@ router.put(
     require("./ProfilePicture/ProfilePictureUpload")
 );
 
+router.get("/admin/UserInfo/getUserInfoList", require("./UserInfo/getUserInfoList"))
+
 module.exports = router;

@@ -11,7 +11,7 @@ const User = sequelize.define("okr_users", {
     password: {
         type: Sequelize.STRING,
         allowNull: false, // 不允许为空
-        unique: false, // 约束不能为空格
+        unique: false, // 约束不能为空格  密码在数据库中不具有唯一性
     },
 });
 

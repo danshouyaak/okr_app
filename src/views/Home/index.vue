@@ -3,7 +3,6 @@
     <div class="left">
       <left/>
     </div>
-
     <div class="main">
       <center/>
     </div>
