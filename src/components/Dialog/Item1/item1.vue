@@ -102,11 +102,6 @@
     </div>
   </div>
 
-  <!-- 确认删除弹窗 -->
-  <!-- <el-button plain @click="dialogVisible = true">
-      Click to open the Dialog
-    </el-button> -->
-
   <el-dialog
       v-model="dialogVisible"
       title="Tips"

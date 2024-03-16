@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-import {ref, onBeforeMount, onMounted} from "vue";
+import {ref} from "vue";
 import {getToken} from "@/utils/token.js";
 import {useRouter} from "vue-router";
 import {ElDialog} from "element-plus";
@@ -127,24 +127,5 @@ function radioCheck() {
       overflow: hidden;
     }
   }
-}
-
-.content-one {
-  /* color: black;
-    margin-top: 8%; */
-
-  /* div:first-child {
-        display: flex;
-        justify-content: space-between;
-        background-color: gray;
-        padding: 2%;
-        border-radius: 10px;
-
-        span {
-            font-size: 15px;
-            font-weight: bolder;
-            color: rgba(245, 245, 245, 0.705);
-        }
-    } */
 }
 </style>

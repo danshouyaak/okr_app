@@ -22,9 +22,7 @@ requests.interceptors.request.use(
     (config) => {
         if (getToken()) {
             config.headers.Authorization = getToken();
-            // console.log('----------',getToken());
         }
-        // console.log(getToken());
         nprogress.start();
         return config;
     },
@@ -44,7 +42,7 @@ requests.interceptors.response.use(
         let code = err.request.status
         if (code == 401) {
             removeToken()
-            window.location.href = '/login '
+            window.location.href = '/login'
         }
         return Promise.reject(err);
     }

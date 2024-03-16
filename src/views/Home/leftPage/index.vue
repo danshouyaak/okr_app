@@ -14,7 +14,6 @@
   <div>
     <div class="foot">
       <img src="../../../assets/setting.png" alt="" srcset=""/>
-      <!-- <span>+</span> -->
       <Dialog></Dialog>
     </div>
   </div>
@@ -23,10 +22,6 @@
 <script setup>
 import Dialog from "@/components/Dialog/index.vue";
 import Login from "@/components/Login/index.vue";
-import {getToken} from "@/utils/token.js";
-import {useRouter} from "vue-router";
-
-const router = useRouter();
 </script>
 
 <style lang="scss" scoped>

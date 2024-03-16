@@ -27,3 +27,7 @@ export const reqAddTarget = (params) =>
 // 根据id 删除某一条目标
 export const reqDeleteTarget = (id) =>
     httpPost({url: `/admin/Target/deleteTarget/${id}`, method: "delete"});
+
+// 获取用户信息
+export const reqGetUserInfo = () =>
+    httpGet({url: "/admin/UserInfo/getUserInfoList", method: "get"});

@@ -7,9 +7,17 @@
             src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
         />
         <div class="info-box-info">
-          <div>I'm zhang San</div>
-          <div style="background-color: skyblue;width:200px;height: 3px;border-radius: 20px;margin: 10px 0;"/>
-          <span>我是张三</span>
+          <div> I'm zhang San</div>
+          <div
+              style="
+              background-color: skyblue;
+              width: 200px;
+              height: 3px;
+              border-radius: 20px;
+              margin: 10px 0;
+            "
+          />
+          <span>我是{{ user.nick_name | zhangsan }}</span>
           <span>我是一条咸鱼🐟</span>
         </div>
       </div>
@@ -19,12 +27,29 @@
 </template>
 
 <script setup>
-import {setToken, getToken, removeToken} from "@/utils/token";
-
+import {ref, reactive, onMounted} from "vue";
+import {removeToken} from "@/utils/token";
+import {reqGetUserInfo} from "@/api/index.js";
 const logOut = () => {
   removeToken();
   window.location.reload();
 };
+onMounted(() => {
+  getUserInfo();
+});
+let state = reactive({
+  userInfo: [],
+});
+let user = []
+
+// 获取用户信息
+async function getUserInfo() {
+  await reqGetUserInfo().then((res) => {
+    // state.userInfo = res.data;
+    user = res.data.findAllUserInfoList[0]
+    console.log(res.data.findAllUserInfoList[0].nick_name);
+  });
+}
 </script>
 
 <style lang="scss" scoped>
