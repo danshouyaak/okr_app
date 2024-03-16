@@ -14,8 +14,8 @@ module.exports = async (req, res) => {
             const preview = req.files.preview;
             //   console.log(req.files.preview);
             // preview.mv('./uploads/'+preview.name)
-            preview.mv('./uploads/' + preview.name)
-            let pictureUrl = 'http://localhost:3000/' + preview.name
+            preview.mv("./uploads/" + preview.name);
+            let pictureUrl = "http://localhost:3000/" + preview.name;
             res.status(200).send({
                 meta: {
                     status: 200,
@@ -25,8 +25,8 @@ module.exports = async (req, res) => {
                     name: preview.name,
                     mimetype: preview.mimetype,
                     size: preview.size,
-                    url: pictureUrl
-                }
+                    url: pictureUrl,
+                },
             });
         }
     } catch {

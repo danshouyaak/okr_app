@@ -16,10 +16,10 @@ module.exports = (req, res, next) => {
         // 解码 token (验证 secret 和检查有效期（exp）)
         jwt.verify(token, "xiaoyucot", function (err, decoded) {
             if (err) {
-                return res.status(403).send({
+                return res.status(401).send({
                     msg: "token无效",
-                    status: 403,
-                    data: err,
+                    status: 401,
+                    // data: err,
                 });
             } else {
                 // 如果验证通过，在req中写入解密结果

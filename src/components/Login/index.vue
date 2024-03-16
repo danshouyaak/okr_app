@@ -6,11 +6,7 @@
     <el-col :span="12">
       <div class="demo-basic--circle">
         <div class="block">
-          <el-avatar
-              :size="50"
-              :src="circleUrl"
-              @click="centerDialogVisible = true"
-          />
+          <el-avatar :size="50" :src="circleUrl" @click="islogin"/>
         </div>
       </div>
     </el-col>
@@ -25,7 +21,7 @@
       class="el-dialog"
       style="display: flex; justify-content: right; height: 500px"
   >
-    <div
+    <!-- <div
         v-if="!getToken()"
         class="form-wrapper"
         style="margin-right: 100px; margin-top: 30px"
@@ -58,7 +54,7 @@
       >
         <div class="btn" @click="loginUser">确认</div>
       </div>
-    </div>
+    </div> -->
     <!-- 登录之后展示的信息 -->
     <template v-if="getToken()" style="display: flex">
       <UserInfo></UserInfo>
@@ -68,17 +64,13 @@
 
 <script setup>
 import {ref, reactive, toRefs, onMounted} from "vue";
-import {reqUserLogin} from "@/api/index";
-import {ElMessage} from "element-plus";
-import {setToken, getToken, removeToken} from "@/utils/token";
+import {getToken} from "@/utils/token";
 import UserInfo from "@/components/UserInfo/index.vue";
-import {useRouter} from 'vue-router'
+import {useRouter} from "vue-router";
 
-const router = useRouter()
+const router = useRouter();
 
 const centerDialogVisible = ref(false);
-let userName = ref("");
-let userPwd = ref("");
 let flex = ref("center");
 
 onMounted(() => {
@@ -87,31 +79,6 @@ onMounted(() => {
         "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png";
   }
 });
-
-const loginUser = () => {
-  if (!userName.value.trim() || !userPwd.value.trim()) {
-    centerDialogVisible.value = false;
-    return;
-  }
-  login();
-};
-
-// 登录请求的函数
-async function login() {
-  let res = [];
-  const data = {username: userName.value, password: userPwd.value};
-  res = await reqUserLogin(data);
-  console.log(res);
-  ElMessage({
-    message: "登录成功",
-    type: "success",
-  });
-
-  const token = res.data[0].token;
-  setToken(token);
-  centerDialogVisible.value = false;
-  window.location.reload();
-}
 
 // 头像的图片
 const state = reactive({
@@ -128,20 +95,17 @@ const isTonken = () => {
   return false;
 };
 
-
-// 没登陆 跳转到登录页面
+// 判断是否登录
 const islogin = () => {
-
-  if (getToken()) {
+  if (isTonken()) {
     centerDialogVisible.value = true
     return
   }
-  console.log('islogin');
   router.push({
-    path: '/login'
+    path: 'login'
   })
 
-}
+};
 </script>
 <style lang="scss" scoped></style>
 <style lang="scss">

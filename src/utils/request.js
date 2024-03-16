@@ -4,7 +4,7 @@ import axios from "axios";
 //引入进度条
 import nprogress from "nprogress";
 import "nprogress/nprogress.css";
-import {getToken, setToken} from "@/utils/token";
+import {getToken, setToken, removeToken} from "@/utils/token";
 
 //1.利用axios对象的方法create，去创建一个axios实例
 //2.request就是axios
@@ -41,6 +41,11 @@ requests.interceptors.response.use(
         return res.data;
     },
     (err) => {
+        let code = err.request.status
+        if (code == 401) {
+            removeToken()
+            window.location.href = '/login '
+        }
         return Promise.reject(err);
     }
 );

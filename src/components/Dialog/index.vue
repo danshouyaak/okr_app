@@ -1,5 +1,5 @@
 <template>
-  <span @click="visible = true" class="span"> + </span>
+  <span @click="visibles" class="span"> + </span>
   <el-dialog v-model="visible" :show-close="false" width="1000">
     <template #header="{ close, titleId, titleClass }">
       <div class="my-header">
@@ -19,9 +19,6 @@
         </div>
       </div>
       <div class="content-one" v-if="tabIndex == 0">
-        <!-- <span>提高身体素质</span> -->
-        <!-- <input type="radio"> -->
-        <!-- <input type="radio" name="radioGroup" :checked="radioValue" @click="radioCheck"> -->
         <Item1></Item1>
       </div>
       <div
@@ -43,15 +40,27 @@
 </template>
 
 <script setup>
-import {ref} from "vue";
-import {ElButton, ElDialog} from "element-plus";
+import {ref, onBeforeMount, onMounted} from "vue";
+import {getToken} from "@/utils/token.js";
+import {useRouter} from "vue-router";
+import {ElDialog} from "element-plus";
 import Item1 from "./Item1/item1.vue";
 import Item2 from "./Item2/item2.vue";
 import Item3 from "./Item3/item3.vue";
 
+const router = useRouter();
+
 const visible = ref(false);
 const radioValue = ref(false);
-
+const visibles = () => {
+  if (!getToken()) {
+    router.push({
+      path: "/login",
+    });
+    return;
+  }
+  visible.value = true;
+};
 const tabIndex = ref(0);
 const items = ["基本信息", "关键结果", "动机&可行性"];
 const changeColor = (index) => {
