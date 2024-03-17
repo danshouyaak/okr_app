@@ -3,7 +3,7 @@ module.exports = async (req, res) => {
     const userId = req.decoded.userId
     const findAllUserInfoList = await UserInfo.findAll({
         where: {
-            id: userId
+            user_id: userId
         }
     })
     res.status(200).send({
