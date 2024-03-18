@@ -31,3 +31,12 @@ export const reqDeleteTarget = (id) =>
 // 获取用户信息
 export const reqGetUserInfo = () =>
     httpGet({url: "/admin/UserInfo/getUserInfoList", method: "get"});
+
+// 新建关键结果
+export const reqGetKeyResultList = () =>
+    httpGet({url: "/admin/KeyResult/getKeyResultList", method: "get"});
+// 添加关键结果 
+export const reqAddKeyResult = (data) =>
+    httpPost({url: "/admin/KeyResult/addKeyResult", method: 'post', data})
+// 根据id删除关键结果
+export const reqDeleteResult = (id) => httpPost({url: `/admin/KeyResult/deteleKeyRes/${id}`, method: 'delete'})

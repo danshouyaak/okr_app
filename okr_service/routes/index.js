@@ -31,6 +31,25 @@ router.put(
     require("./ProfilePicture/ProfilePictureUpload")
 );
 
-router.get("/admin/UserInfo/getUserInfoList", require("./UserInfo/getUserInfoList"))
+// 获取用户登录信息
+router.get(
+    "/admin/UserInfo/getUserInfoList",
+    require("./UserInfo/getUserInfoList")
+);
 
+// 获取关键结果列表
+router.get(
+    "/admin/KeyResult/getKeyResultList",
+    require("./KeyResult/getKeyResultList")
+);
+// 添加关键结果
+router.post(
+    "/admin/KeyResult/addKeyResult",
+    require("./KeyResult/addKeyResult")
+);
+// 根据id删除关键结果
+router.delete(
+    "/admin/KeyResult/deteleKeyRes/:id",
+    require("./KeyResult/deteleKeyRes")
+);
 module.exports = router;

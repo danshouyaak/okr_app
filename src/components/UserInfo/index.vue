@@ -31,7 +31,6 @@ import {ref, reactive, onMounted} from "vue";
 import {removeToken} from "@/utils/token";
 import {reqGetUserInfo} from "@/api/index.js";
 
-const a = ref("a");
 const logOut = () => {
   removeToken();
   window.location.reload();
@@ -42,14 +41,11 @@ onMounted(() => {
 let state = reactive({
   userInfo: [],
 });
-let user = ref([]);
 
 // 获取用户信息
 async function getUserInfo() {
   await reqGetUserInfo().then((res) => {
-    // state.userInfo = res.data;
     state.userInfo = res.data.findAllUserInfoList[0];
-    console.log(state.userInfo);
   });
 }
 </script>

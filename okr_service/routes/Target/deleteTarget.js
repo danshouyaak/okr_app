@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
             id: deleteId,
         },
     });
-    console.log(deleteTarget);
+    // console.log(deleteTarget);
     if (deleteTarget > 0) {
         res.status(200).send({
             data: deleteTarget,

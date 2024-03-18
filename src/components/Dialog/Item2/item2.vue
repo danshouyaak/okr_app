@@ -1,25 +1,30 @@
 <template>
   <div class="scrollable-div">
     <div class="newResult">
-      <input placeholder="📃新建关键结果" />
+      <input placeholder="📃新建关键结果" v-model="newResultValue"/>
       <!-- <button type="button">点击新建☞</button> -->
-      <button @click="handleRes">
+      <button class="button" @click="handleRes">
         <span class="transition"></span>
         <span class="gradient"></span>
         <span class="label">点击新建</span>
       </button>
     </div>
     <div class="newRes">
-      <div v-for="(item, index) in 5" :key="index">
-        <div>{{ item }}</div>
-        <hr v-if="item != 5" />
+      <div v-for="(item, index) in state.keyResultList" :key="index">
+        <div style="display: flex; align-items: center; height: 50px">
+          <div style="flex: 9">{{ item.key_result_content }}</div>
+          <button style="margin-right: 2%" @click="deleteRes(item.id)">
+            删除
+          </button>
+        </div>
+        <hr v-if="index !== state.keyResultList.length - 1"/>
       </div>
     </div>
     <div class="moresetting">
       <div style="font-size: 10px; text-align: left">更多设置</div>
       <div style="">
         <div>📃 使用权重</div>
-        <el-switch v-model="value1" />
+        <el-switch v-model="switchVal"/>
       </div>
       <div style="font-size: 12px; text-align: left">
         根据关键结果对于目标进度进行共享分配权重等级
@@ -29,9 +34,52 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-let value1 = ref(true);
-const handleRes = ()=>{
+import {ref, reactive, onMounted} from "vue";
+import {
+  reqGetKeyResultList,
+  reqAddKeyResult,
+  reqDeleteResult,
+} from "@/api/index.js";
+import {ElMessage} from "element-plus";
+
+let switchVal = ref(true);
+const newResultValue = ref("");
+const state = reactive({
+  keyResultList: [],
+});
+// 点击新建按钮
+const handleRes = () => {
+  AddKeyRes();
+  getKeyResLisst();
+  ElMessage.success("添加成功");
+  newResultValue.value = "";
+};
+// 删除按钮
+const deleteRes = (id) => {
+  DeleteKeyRes(id);
+  getKeyResLisst();
+  ElMessage.success("删除成功");
+};
+onMounted(() => {
+  getKeyResLisst();
+});
+
+// 获取关键结果列表
+async function getKeyResLisst() {
+  await reqGetKeyResultList().then((res) => {
+    state.keyResultList = res.data;
+  });
+}
+
+// 添加关键结果
+async function AddKeyRes() {
+  const data = {keyRes: newResultValue.value};
+  await reqAddKeyResult(data);
+}
+
+// 根据id删除关键结果 reqDeleteResult
+async function DeleteKeyRes(id) {
+  await reqDeleteResult(id);
 }
 </script>
 
@@ -60,8 +108,8 @@ const handleRes = ()=>{
   }
 }
 
-// 
-button {
+//
+.button {
   width: 150px;
   height: 100%;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
@@ -119,8 +167,8 @@ button:hover .transition {
 button:active {
   transform: scale(0.97);
 }
-// 
 
+//
 
 .newResult > input::placeholder {
   color: rgba(255, 255, 255, 0.5);
