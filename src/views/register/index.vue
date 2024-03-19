@@ -25,7 +25,13 @@
         </div>
       </div>
       <div class="action">
-        <div class="btn" @click="registerUser">login</div>
+        <el-button
+            class="btn"
+            @click="registerUser"
+            :loading="loadings.listLoading"
+        >register
+        </el-button
+        >
       </div>
     </div>
   </div>
@@ -33,10 +39,8 @@
 
 <script setup>
 import {useRegister} from "@/hooks/useLogin.js";
-import {reqUserRegister} from "@/api/index";
-import {ElMessage} from "element-plus";
 
-const {userName, userPwd, registerUser, register} = useRegister();
+const {userName, userPwd, registerUser, loadings} = useRegister();
 </script>
 
 <style lang="scss" scoped>

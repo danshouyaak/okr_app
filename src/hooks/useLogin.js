@@ -1,4 +1,4 @@
-import {ref} from "vue";
+import {ref, reactive} from "vue";
 import {reqUserLogin, reqUserRegister} from "@/api/index";
 import {ElMessage} from "element-plus";
 import {setToken} from "@/utils/token";
@@ -6,6 +6,9 @@ import {useRouter} from "vue-router";
 
 let userName = ref("");
 let userPwd = ref("");
+let loadings = reactive({
+    listLoading: false,
+});
 // 登录hooks
 export const useLogin = () => {
     const router = useRouter();
@@ -15,6 +18,7 @@ export const useLogin = () => {
             //   centerDialogVisible.value = false;
             return;
         }
+        loadings.listLoading = true;
         login();
     };
 
@@ -30,7 +34,7 @@ export const useLogin = () => {
         });
         const token = res.data[0].token;
         setToken(token);
-
+        // loadings.listLoading = false
         router.push({
             path: "/home",
         });
@@ -41,6 +45,7 @@ export const useLogin = () => {
         userPwd,
         loginUser,
         login,
+        loadings,
     };
 };
 export const useRegister = () => {
@@ -56,6 +61,7 @@ export const useRegister = () => {
             ElMessage.error("请填写完整账号密码");
             return;
         }
+        loadings.listLoading = true;
         register();
         router.push({
             path: "/login",
@@ -70,6 +76,7 @@ export const useRegister = () => {
             message: res.meta.msg,
             type: "success",
         });
+        loadings.listLoading = false;
     }
 
     return {
@@ -77,5 +84,6 @@ export const useRegister = () => {
         userPwd,
         registerUser,
         register,
+        loadings
     };
 };
