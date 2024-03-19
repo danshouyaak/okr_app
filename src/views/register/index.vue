@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="form-wrapper">
-      <div class="header">LOGIN</div>
+      <div class="header">register</div>
       <div class="input-wrapper">
         <div class="border-wrapper">
           <input
@@ -25,17 +25,18 @@
         </div>
       </div>
       <div class="action">
-        <div class="btn" @click="loginUser">login</div>
+        <div class="btn" @click="registerUser">login</div>
       </div>
-      <router-link :to="{ path: 'register'}" style="font-size: 10px;margin-top: 1%;">点击注册</router-link>
     </div>
   </div>
 </template>
 
 <script setup>
-import {useLogin} from "@/hooks/useLogin.js";
+import {useRegister} from "@/hooks/useLogin.js";
+import {reqUserRegister} from "@/api/index";
+import {ElMessage} from "element-plus";
 
-const {userName, userPwd, loginUser} = useLogin();
+const {userName, userPwd, registerUser, register} = useRegister();
 </script>
 
 <style lang="scss" scoped>
@@ -63,6 +64,7 @@ const {userName, userPwd, loginUser} = useLogin();
 .header {
   font-size: 35px;
   color: white;
+  text-transform: uppercase;
 }
 
 .input-wrapper {

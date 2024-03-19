@@ -13,11 +13,11 @@ module.exports = async (req, res) => {
     const model = await User.findOne({where: {username}});
 
     if (model) {
-        res.status(400).send({
+        res.status(200).send({
             data: null,
             meta: {
                 msg: "用户已存在",
-                status: 400,
+                status: 200,
             },
         });
         return;

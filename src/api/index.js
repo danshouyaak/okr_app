@@ -9,12 +9,10 @@ import {httpGet, httpPost} from "./http";
 
 // 获取用户列表
 export const reqGetUserList = () => httpGet("/admin/getUserList");
-
+export const reqUserRegister = (data) => httpPost({url: "/admin/register", method: "post", data})
 // 用户登录
 export const reqUserLogin = (data) =>
     httpPost({url: "/admin/login", method: "post", data});
-// export const reqUserLogin = (data) =>
-//   requests({ url: "/admin/login", method: "post", data });
 
 // 获取 目标列表
 export const reqGetTargetList = () =>
@@ -35,8 +33,9 @@ export const reqGetUserInfo = () =>
 // 新建关键结果
 export const reqGetKeyResultList = () =>
     httpGet({url: "/admin/KeyResult/getKeyResultList", method: "get"});
-// 添加关键结果 
+// 添加关键结果
 export const reqAddKeyResult = (data) =>
-    httpPost({url: "/admin/KeyResult/addKeyResult", method: 'post', data})
+    httpPost({url: "/admin/KeyResult/addKeyResult", method: "post", data});
 // 根据id删除关键结果
-export const reqDeleteResult = (id) => httpPost({url: `/admin/KeyResult/deteleKeyRes/${id}`, method: 'delete'})
+export const reqDeleteResult = (id) =>
+    httpPost({url: `/admin/KeyResult/deteleKeyRes/${id}`, method: "delete"});

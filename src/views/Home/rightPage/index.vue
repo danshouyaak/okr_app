@@ -64,7 +64,9 @@
       </div>
     </div>
     <div class="memo">
-      <div class="memo-head" style="font-size: 11px; margin-left: -80%">备忘</div>
+      <div class="memo-head" style="font-size: 11px; margin-left: -80%">
+        备忘
+      </div>
       <div class="memo-content">
         <textarea placeholder="备忘"></textarea>
       </div>
@@ -80,6 +82,21 @@ const format = (percentage) => (percentage === 100 ? "Full" : `${percentage}%`);
 .all {
   max-height: 100%;
   overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 16px;
+  background-color: aqua;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(239, 239, 239);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #40a0ff;
 }
 .top {
   display: flex;

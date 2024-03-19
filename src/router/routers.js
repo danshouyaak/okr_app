@@ -6,6 +6,10 @@ export default [
     },
     {
         path: "/login",
-        component: () => import("../views/Login/index.vue")
+        component: () => import("../views/Login/index.vue"),
+    },
+    {
+        path: "/register",
+        component: () => import("../views/register/index.vue"),
     },
 ];

@@ -12,11 +12,12 @@ router.get("/index", function (req, res, next) {
         },
     });
 });
-
+// 用户注册
 router.post("/admin/register", require("./User/register"));
+// 用户登录
 router.post("/admin/login", require("./User/login"));
 router.get("/admin/getUserList", require("./User/getUserList"));
-
+// 获取目标列表
 router.get("/admin/Target/getTargetList", require("./Target/getTargetList"));
 router.get("/admin/Target/addTarget", require("./Target/addTarget"));
 // 根据id进行删除

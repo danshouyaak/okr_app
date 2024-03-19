@@ -17,9 +17,6 @@ import left from "@/views/Home/leftPage/index.vue";
 import center from "@/views/Home/centerPage/index.vue";
 import right from "@/views/Home/rightPage/index.vue";
 </script>
-<script>
-export default {};
-</script>
 
 <style lang="scss" scoped>
 * {

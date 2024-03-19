@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="all">
     <div class="top">
       <img src="../../../assets/list.png" width="25px" height="25px"/>
       <span>+</span>
@@ -25,8 +25,10 @@
         进行中
       </div>
       <div class="underway-item">
-        <div class="item">
-          <div>示例目标：ios应用程序开发入门</div>
+        <div class="item" v-for="item in state.resAdd" :key="item.id">
+          <!-- <div v-for="item in state.resAdd" :key="item.id">{{ item.target_content }}</div> -->
+          <!-- <div>示例目标：ios应用程序开发入门</div> -->
+          <div>{{ item.target_content }}</div>
           <div>🗓️2024/1/6 ~ 2024/2/6</div>
           <el-progress :percentage="percentage1" :color="customColor1"/>
           <hr/>
@@ -51,25 +53,42 @@
 </template>
 
 <script setup>
-import {ref} from "vue";
+import {ref, onBeforeMount} from "vue";
+import {useGetTarget} from "@/hooks/useGetTarget.js";
 
+const {state, getTargetList} = useGetTarget();
+onBeforeMount(() => {
+  getTargetList();
+});
 const percentage1 = ref(9);
 const percentage2 = ref(20);
 const percentage3 = ref(30);
 const customColor1 = ref("#409eff");
 const customColor2 = ref("#f56c6c");
 const customColor3 = ref("#5cb87a");
-
-const customColors = [
-  {color: "#f56c6c", percentage: 20},
-  {color: "#e6a23c", percentage: 40},
-  {color: "#5cb87a", percentage: 60},
-  {color: "#1989fa", percentage: 80},
-  {color: "#6f7ad3", percentage: 100},
-];
 </script>
 
 <style lang="scss" scoped>
+.all {
+  max-height: 100%;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 16px;
+  background-color: aqua;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(239, 239, 239);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #40a0ff;
+}
+
 .top {
   display: flex;
   justify-content: end;

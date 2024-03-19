@@ -119,25 +119,23 @@
 </template>
 
 <script setup>
-import {ref, reactive, onMounted, onBeforeMount} from "vue";
+import {ref, reactive, onBeforeMount} from "vue";
 import {ElMessage, ElMessageBox} from "element-plus";
 import curDate from "../../Date/index.vue";
-import {reqGetTargetList, reqAddTarget, reqDeleteTarget} from "@/api/index";
+import {reqAddTarget, reqDeleteTarget} from "@/api/index";
 import {getToken} from "@/utils/token";
 
+import {useGetTarget} from "@/hooks/useGetTarget.js";
+
+const {inp1, state, getTargetList} = useGetTarget();
+let id = ref(null);
+const radioValue = ref(false);
+const value1 = ref(true);
 onBeforeMount(() => {
   if (getToken()) {
     getTargetList();
   }
 });
-
-let inp1 = ref("");
-let state = reactive({
-  resAdd: [],
-});
-let id = ref(null);
-const radioValue = ref(false);
-const value1 = ref(true);
 
 // 点击添加的函数
 function enterInp1() {
@@ -165,6 +163,7 @@ function handleChange(value) {
   }
 }
 
+// 点击删除
 const deleteResItem = (deleteId) => {
   id.value = deleteId;
   dialogVisible.value = true;
@@ -182,13 +181,6 @@ function getCurrentDate() {
   curTime.value = `${year}/${month}/${day} ${hours}:${minutes}`;
 }
 //
-
-// 获取目标列表
-async function getTargetList() {
-  await reqGetTargetList().then((res) => {
-    state.resAdd = res.data;
-  });
-}
 
 // 添加目标
 async function addTarget() {
