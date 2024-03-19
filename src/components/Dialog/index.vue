@@ -18,23 +18,33 @@
           </span>
         </div>
       </div>
-      <div class="content-one" v-if="tabIndex == 0">
-        <Item1></Item1>
+      <div class="content-one">
+        <keep-alive :include="['Item1','Item2']" :max="10">
+          <component :is="comName[tabIndex]" :key="tabIndex.value"></component>
+        </keep-alive>
       </div>
-      <div
-          class="content-two"
-          style="color: black; margin-top: 8%"
-          v-if="tabIndex == 1"
-      >
+      <!-- <div class="content-one" v-if="tabIndex == 0">
+        <keep-alive v-if="tabIndex == 0" :include="['基本信息']">
+          <component :is="Item1"></component>
+        </keep-alive>
+      </div> -->
+      <!-- <div
+        class="content-two"
+        style="color: black; margin-top: 8%"
+        v-if="tabIndex == 1"
+      > -->
+      <!-- 关键结果 -->
+      <!-- <keep-alive v-if="tabIndex == 1" :include="['关键结果']">
         <Item2></Item2>
-      </div>
-      <div
-          class="content-three"
-          style="color: black; margin-top: 8%"
-          v-if="tabIndex == 2"
+      </keep-alive>
+    </div> -->
+      <!-- <div
+        class="content-three"
+        style="color: black; margin-top: 8%"
+        v-if="tabIndex == 2"
       >
         <Item3></Item3>
-      </div>
+      </div> -->
     </template>
   </el-dialog>
 </template>
@@ -61,8 +71,9 @@ const visibles = () => {
   }
   visible.value = true;
 };
-const tabIndex = ref(0);
+let tabIndex = ref(0);
 const items = ["基本信息", "关键结果", "动机&可行性"];
+const comName = [Item1, Item2, Item3]
 const changeColor = (index) => {
   tabIndex.value = index;
 };

@@ -27,7 +27,6 @@
       <div class="underway-item">
         <div class="item" v-for="item in state.resAdd" :key="item.id">
           <!-- <div v-for="item in state.resAdd" :key="item.id">{{ item.target_content }}</div> -->
-          <!-- <div>示例目标：ios应用程序开发入门</div> -->
           <div>{{ item.target_content }}</div>
           <div>🗓️2024/1/6 ~ 2024/2/6</div>
           <el-progress :percentage="percentage1" :color="customColor1"/>

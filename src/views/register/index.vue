@@ -30,9 +30,14 @@
             @click="registerUser"
             :loading="loadings.listLoading"
         >register
-        </el-button
-        >
+        </el-button>
       </div>
+      <router-link
+          :to="{ path: '/login' }"
+          style="font-size: 10px; margin-top: 1%"
+      >点击登录
+      </router-link
+      >
     </div>
   </div>
 </template>

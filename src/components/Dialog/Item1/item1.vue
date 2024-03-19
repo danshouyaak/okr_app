@@ -2,12 +2,14 @@
   <div class="scrollable-div">
     <div class="content-one">
       <!-- <span>提高身体素质</span> -->
+
       <input
         class="input"
         type="text"
         placeholder="请输入目标：提高身体素质"
         v-model="inp1"
       />
+
       <button
         @click="enterInp1"
         style="
@@ -118,8 +120,8 @@
   </el-dialog>
 </template>
 
-<script setup>
-import {ref, reactive, onBeforeMount} from "vue";
+<script setup name="基本信息">
+import {ref, onBeforeMount, onMounted} from "vue";
 import {ElMessage, ElMessageBox} from "element-plus";
 import curDate from "../../Date/index.vue";
 import {reqAddTarget, reqDeleteTarget} from "@/api/index";
@@ -128,6 +130,7 @@ import {getToken} from "@/utils/token";
 import {useGetTarget} from "@/hooks/useGetTarget.js";
 
 const {inp1, state, getTargetList} = useGetTarget();
+
 let id = ref(null);
 const radioValue = ref(false);
 const value1 = ref(true);
@@ -136,7 +139,9 @@ onBeforeMount(() => {
     getTargetList();
   }
 });
-
+onMounted(() => {
+  console.log('onMounted');
+})
 // 点击添加的函数
 function enterInp1() {
   if (!inp1.value.trim()) {

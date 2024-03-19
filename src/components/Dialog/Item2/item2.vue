@@ -33,7 +33,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup name="关键结果">
 import {ref, reactive, onMounted} from "vue";
 import {
   reqGetKeyResultList,
