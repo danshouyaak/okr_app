@@ -120,7 +120,7 @@
   </el-dialog>
 </template>
 
-<script setup name="基本信息">
+<script setup name="Item1">
 import {ref, onBeforeMount, onMounted} from "vue";
 import {ElMessage, ElMessageBox} from "element-plus";
 import curDate from "../../Date/index.vue";
@@ -140,7 +140,6 @@ onBeforeMount(() => {
   }
 });
 onMounted(() => {
-  console.log('onMounted');
 })
 // 点击添加的函数
 function enterInp1() {
@@ -152,8 +151,7 @@ function enterInp1() {
     ElMessage.error("请勾选添加按钮！！！");
     return;
   }
-  addTarget();
-  getTargetList();
+  addTarget()
   inp1.value = "";
   radioValue.value = false;
 }
@@ -197,6 +195,7 @@ async function addTarget() {
       type: "success",
     });
   }
+  getTargetList()
 }
 
 // 根据id删除某一个目标
@@ -208,6 +207,7 @@ async function DeleteTarget(id) {
       type: "success",
     });
   }
+  getTargetList()
   return res;
 }
 

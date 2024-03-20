@@ -2,7 +2,6 @@
   <div class="scrollable-div">
     <div class="newResult">
       <input placeholder="📃新建关键结果" v-model="newResultValue"/>
-      <!-- <button type="button">点击新建☞</button> -->
       <button class="button" @click="handleRes">
         <span class="transition"></span>
         <span class="gradient"></span>
@@ -33,7 +32,7 @@
   </div>
 </template>
 
-<script setup name="关键结果">
+<script setup name="Item2">
 import {ref, reactive, onMounted} from "vue";
 import {
   reqGetKeyResultList,
@@ -41,23 +40,21 @@ import {
   reqDeleteResult,
 } from "@/api/index.js";
 import {ElMessage} from "element-plus";
+import {useKeyRes} from "@/hooks/useGetTarget.js";
 
+const {newResultValue, state} = useKeyRes();
 let switchVal = ref(true);
-const newResultValue = ref("");
-const state = reactive({
-  keyResultList: [],
-});
+
 // 点击新建按钮
 const handleRes = () => {
   AddKeyRes();
-  getKeyResLisst();
   ElMessage.success("添加成功");
   newResultValue.value = "";
 };
 // 删除按钮
 const deleteRes = (id) => {
   DeleteKeyRes(id);
-  getKeyResLisst();
+
   ElMessage.success("删除成功");
 };
 onMounted(() => {
@@ -75,16 +72,20 @@ async function getKeyResLisst() {
 async function AddKeyRes() {
   const data = {keyRes: newResultValue.value};
   await reqAddKeyResult(data);
+  getKeyResLisst();
 }
 
 // 根据id删除关键结果 reqDeleteResult
 async function DeleteKeyRes(id) {
   await reqDeleteResult(id);
+  getKeyResLisst();
 }
 </script>
 
 <style lang="scss" scoped>
 .scrollable-div {
+  color: black;
+  margin-top: 8%;
   height: 350px;
   /* 设置div的高度 */
   overflow: auto;

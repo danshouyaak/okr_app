@@ -4,7 +4,7 @@
     <template #header="{ close, titleId, titleClass }">
       <div class="my-header">
         <div>编辑目标</div>
-        <span @click="close">完成</span>
+        <span @click="closeDialog">完成</span>
       </div>
       <div class="center">
         <div class="tab">
@@ -18,33 +18,15 @@
           </span>
         </div>
       </div>
-      <div class="content-one">
-        <keep-alive :include="['Item1','Item2']" :max="10">
-          <component :is="comName[tabIndex]" :key="tabIndex.value"></component>
-        </keep-alive>
+      <div class="content-one" v-show="tabIndex == 0">
+        <Item1/>
       </div>
-      <!-- <div class="content-one" v-if="tabIndex == 0">
-        <keep-alive v-if="tabIndex == 0" :include="['基本信息']">
-          <component :is="Item1"></component>
-        </keep-alive>
-      </div> -->
-      <!-- <div
-        class="content-two"
-        style="color: black; margin-top: 8%"
-        v-if="tabIndex == 1"
-      > -->
-      <!-- 关键结果 -->
-      <!-- <keep-alive v-if="tabIndex == 1" :include="['关键结果']">
-        <Item2></Item2>
-      </keep-alive>
-    </div> -->
-      <!-- <div
-        class="content-three"
-        style="color: black; margin-top: 8%"
-        v-if="tabIndex == 2"
-      >
-        <Item3></Item3>
-      </div> -->
+      <div class="content-two" v-show="tabIndex == 1">
+        <Item2/>
+      </div>
+      <div class="content-three" v-show="tabIndex == 2">
+        <Item3/>
+      </div>
     </template>
   </el-dialog>
 </template>
@@ -57,7 +39,15 @@ import {ElDialog} from "element-plus";
 import Item1 from "./Item1/item1.vue";
 import Item2 from "./Item2/item2.vue";
 import Item3 from "./Item3/item3.vue";
+import {useGetTarget, useKeyRes} from "@/hooks/useGetTarget.js";
 
+const {inp1} = useGetTarget();
+const {newResultValue} = useKeyRes();
+const closeDialog = () => {
+  console.log(inp1.value);
+  console.log(newResultValue.value);
+  visible.value = false; // 控制窗口关闭
+};
 const router = useRouter();
 
 const visible = ref(false);
@@ -71,9 +61,8 @@ const visibles = () => {
   }
   visible.value = true;
 };
-let tabIndex = ref(0);
+const tabIndex = ref(0);
 const items = ["基本信息", "关键结果", "动机&可行性"];
-const comName = [Item1, Item2, Item3]
 const changeColor = (index) => {
   tabIndex.value = index;
 };

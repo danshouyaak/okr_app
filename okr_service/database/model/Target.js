@@ -5,7 +5,7 @@ const Target = sequelize.define("okr_targets", {
     target_content: {
         type: Sequelize.STRING, // 字段类型
         allowNull: false, // 不允许为空
-        unique: true, // 约束不能为空格
+        unique: false, // 约束不能为空格
     },
     user_id: {
         type: Sequelize.INTEGER,// integet
