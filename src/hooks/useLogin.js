@@ -84,6 +84,6 @@ export const useRegister = () => {
         userPwd,
         registerUser,
         register,
-        loadings
+        loadings,
     };
 };

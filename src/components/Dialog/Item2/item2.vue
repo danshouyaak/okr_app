@@ -47,13 +47,13 @@ let switchVal = ref(true);
 
 // 点击新建按钮
 const handleRes = () => {
-  AddKeyRes();
+  // AddKeyRes();
   ElMessage.success("添加成功");
   newResultValue.value = "";
 };
 // 删除按钮
 const deleteRes = (id) => {
-  DeleteKeyRes(id);
+  // DeleteKeyRes(id);
 
   ElMessage.success("删除成功");
 };

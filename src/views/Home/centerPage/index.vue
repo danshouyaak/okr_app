@@ -25,25 +25,19 @@
         进行中
       </div>
       <div class="underway-item">
-        <div class="item" v-for="item in state.resAdd" :key="item.id">
+        <div
+            class="item"
+            v-for="(item, index) in state.resAdd"
+            :key="item.id"
+            :class="{
+            'underway-item-active': index === selectTemp,
+          }"
+            @click="selectItem(index, item)"
+        >
           <!-- <div v-for="item in state.resAdd" :key="item.id">{{ item.target_content }}</div> -->
           <div>{{ item.target_content }}</div>
           <div>🗓️2024/1/6 ~ 2024/2/6</div>
           <el-progress :percentage="percentage1" :color="customColor1"/>
-          <hr/>
-        </div>
-
-        <div class="item">
-          <div>示例目标：ios应用程序开发入门</div>
-          <div>🗓️2024/1/6 ~ 2024/2/6</div>
-          <el-progress :percentage="percentage2" :color="customColor2"/>
-          <hr/>
-        </div>
-
-        <div class="item">
-          <div>示例目标：ios应用程序开发入门</div>
-          <div>🗓️2024/1/6 ~ 2024/2/6</div>
-          <el-progress :percentage="percentage3" :color="customColor3"/>
           <hr/>
         </div>
       </div>
@@ -60,11 +54,12 @@ onBeforeMount(() => {
   getTargetList();
 });
 const percentage1 = ref(9);
-const percentage2 = ref(20);
-const percentage3 = ref(30);
 const customColor1 = ref("#409eff");
-const customColor2 = ref("#f56c6c");
-const customColor3 = ref("#5cb87a");
+const selectTemp = ref(0);
+const selectItem = (index, item) => {
+  selectTemp.value = index;
+  console.log(item.target_content);
+};
 </script>
 
 <style lang="scss" scoped>
@@ -121,7 +116,12 @@ const customColor3 = ref("#5cb87a");
   align-items: center;
 }
 
+.underway-item-active {
+  background-color: black;
+}
+
 .underway-item {
+  margin-bottom: 2%;
   height: 100%;
   width: 92%;
   // border: 1px solid red;
@@ -129,8 +129,8 @@ const customColor3 = ref("#5cb87a");
   background-color: rgb(57, 62, 66);
 
   .item {
-    margin-top: 2%;
     padding: 1%;
+    border-radius: 10px;
     // border: 1px solid brown;
     div {
       font-weight: 1000;

@@ -24,6 +24,7 @@ export const useGetTarget = () => {
 };
 export const useKeyRes = () => {
     return {
-        newResultValue, state
-    }
+        newResultValue,
+        state,
+    };
 };

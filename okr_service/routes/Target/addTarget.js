@@ -6,6 +6,8 @@ module.exports = async (req, res) => {
         target_content: addValue,
         user_id: userId,
     });
+    //   const connectOkrTargetsId = createAddValue.id;
+    //   console.log("connectOkrTargetsId", connectOkrTargetsId);
     res.status(200).send({
         data: createAddValue,
         meta: {

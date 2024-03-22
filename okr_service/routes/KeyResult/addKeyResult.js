@@ -1,7 +1,7 @@
 const {KeyResult} = require("../../database/model/KeyReslut");
 module.exports = async (req, res) => {
     const userId = req.decoded.userId;
-    const newAddKeyRes = req.body.keyRes;
+    const newAddKeyRes = req.query.keyRes;
     let createAddValue = await KeyResult.create({
         key_result_content: newAddKeyRes,
         user_id: userId,

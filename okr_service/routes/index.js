@@ -23,34 +23,37 @@ router.get("/admin/Target/addTarget", require("./Target/addTarget"));
 // 根据id进行删除
 router.delete(
     "/admin/Target/deleteTarget/:id",
-    require("./Target/deleteTarget")
+    require("./Target/deleteTarget"),
 );
 
 // 文件上传
 router.put(
     "/admin/file/Upload",
-    require("./ProfilePicture/ProfilePictureUpload")
+    require("./ProfilePicture/ProfilePictureUpload"),
 );
 
 // 获取用户登录信息
 router.get(
     "/admin/UserInfo/getUserInfoList",
-    require("./UserInfo/getUserInfoList")
+    require("./UserInfo/getUserInfoList"),
 );
 
 // 获取关键结果列表
 router.get(
     "/admin/KeyResult/getKeyResultList",
-    require("./KeyResult/getKeyResultList")
+    require("./KeyResult/getKeyResultList"),
 );
 // 添加关键结果
-router.post(
+router.get(
     "/admin/KeyResult/addKeyResult",
-    require("./KeyResult/addKeyResult")
+    require("./KeyResult/addKeyResult"),
 );
 // 根据id删除关键结果
 router.delete(
     "/admin/KeyResult/deteleKeyRes/:id",
-    require("./KeyResult/deteleKeyRes")
+    require("./KeyResult/deteleKeyRes"),
 );
+
+// 主页中间 进行中的添加
+router.get("/admin/going/target", require("./Going/addGoing"));
 module.exports = router;

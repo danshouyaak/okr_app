@@ -11,9 +11,11 @@ export function httpGet({url, meth, params = {}}) {
             params,
         })
             .then((reslut) => {
+                // console.log(reslut);
                 resolve(reslut);
             })
             .catch((err) => {
+                // console.log(err);
                 reject(err);
             });
     });

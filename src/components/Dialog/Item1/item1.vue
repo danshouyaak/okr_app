@@ -140,7 +140,7 @@ onBeforeMount(() => {
   }
 });
 onMounted(() => {
-})
+});
 // 点击添加的函数
 function enterInp1() {
   if (!inp1.value.trim()) {
@@ -151,7 +151,7 @@ function enterInp1() {
     ElMessage.error("请勾选添加按钮！！！");
     return;
   }
-  addTarget()
+  // addTarget();
   inp1.value = "";
   radioValue.value = false;
 }
@@ -195,7 +195,7 @@ async function addTarget() {
       type: "success",
     });
   }
-  getTargetList()
+  getTargetList();
 }
 
 // 根据id删除某一个目标
@@ -207,7 +207,7 @@ async function DeleteTarget(id) {
       type: "success",
     });
   }
-  getTargetList()
+  getTargetList();
   return res;
 }
 
@@ -215,7 +215,7 @@ async function DeleteTarget(id) {
 const dialogVisible = ref(false);
 let deleteButton = (variable) => {
   if (variable) {
-    DeleteTarget(id.value);
+    // DeleteTarget(id.value);
     getTargetList();
     dialogVisible.value = false;
     return;

@@ -12,10 +12,10 @@ router.beforeEach((to, from, next) => {
     if (getToken()) {
         if ((from.path == "/home" || from.path == "/") && to.path == "/login") {
             // 已登录就不能回到登录页面
-            next('/home')
-            return
+            next("/home");
+            return;
         }
     }
-    next()
+    next();
 });
 export default router;

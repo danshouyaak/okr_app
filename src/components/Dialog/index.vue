@@ -41,13 +41,27 @@ import Item2 from "./Item2/item2.vue";
 import Item3 from "./Item3/item3.vue";
 import {useGetTarget, useKeyRes} from "@/hooks/useGetTarget.js";
 
-const {inp1} = useGetTarget();
+const {inp1, getTargetList} = useGetTarget();
 const {newResultValue} = useKeyRes();
+import {reqGoingAdd} from "@/api/index.js";
+import {ElMessage} from "element-plus";
 const closeDialog = () => {
-  console.log(inp1.value);
-  console.log(newResultValue.value);
+  if (inp1.value && newResultValue.value) {
+    addGoingAdd();
+    ElMessage.success("操作成功");
+  }
   visible.value = false; // 控制窗口关闭
 };
+
+// reqGoingAdd
+async function addGoingAdd() {
+  let data = {addValue: inp1.value, keyRes: newResultValue.value};
+  let res = await reqGoingAdd(data);
+  inp1.value = "";
+  newResultValue.value = "";
+  getTargetList();
+}
+
 const router = useRouter();
 
 const visible = ref(false);

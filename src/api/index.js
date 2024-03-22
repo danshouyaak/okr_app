@@ -9,7 +9,8 @@ import {httpGet, httpPost} from "./http";
 
 // 获取用户列表
 export const reqGetUserList = () => httpGet("/admin/getUserList");
-export const reqUserRegister = (data) => httpPost({url: "/admin/register", method: "post", data})
+export const reqUserRegister = (data) =>
+    httpPost({url: "/admin/register", method: "post", data});
 // 用户登录
 export const reqUserLogin = (data) =>
     httpPost({url: "/admin/login", method: "post", data});
@@ -34,8 +35,12 @@ export const reqGetUserInfo = () =>
 export const reqGetKeyResultList = () =>
     httpGet({url: "/admin/KeyResult/getKeyResultList", method: "get"});
 // 添加关键结果
-export const reqAddKeyResult = (data) =>
-    httpPost({url: "/admin/KeyResult/addKeyResult", method: "post", data});
+export const reqAddKeyResult = (params) =>
+    httpGet({url: "/admin/KeyResult/addKeyResult", method: "get", params});
 // 根据id删除关键结果
 export const reqDeleteResult = (id) =>
     httpPost({url: `/admin/KeyResult/deteleKeyRes/${id}`, method: "delete"});
+
+// 主页中间 进行中的添加
+export const reqGoingAdd = (params) =>
+    httpGet({url: "/admin/going/target", method: "get", params});

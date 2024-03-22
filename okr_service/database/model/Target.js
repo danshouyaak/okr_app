@@ -8,17 +8,17 @@ const Target = sequelize.define("okr_targets", {
         unique: false, // 约束不能为空格
     },
     user_id: {
-        type: Sequelize.INTEGER,// integet
+        type: Sequelize.INTEGER, // integet
         allowNull: false,
         unique: false,
-        field: 'user_id',
-    }
+        field: "user_id",
+    },
 });
 
-// 新建数数据库字段
-// sequelize.queryInterface.addColumn("okr_targets","user_id", {
+// 新建数数据库字段 connect_keyResult_id
+// sequelize.queryInterface.addColumn("okr_targets", "connect_keyResult_id", {
 //   type: Sequelize.INTEGER,
-//   allowNull: false,
+//   allowNull: true,
 //   unique: false,
 // });
 Target.sync().then(() => {
