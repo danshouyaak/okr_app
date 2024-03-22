@@ -13,11 +13,16 @@ const Target = sequelize.define("okr_targets", {
         unique: false,
         field: "user_id",
     },
+    memo: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        unique: false,
+    },
 });
 
 // 新建数数据库字段 connect_keyResult_id
-// sequelize.queryInterface.addColumn("okr_targets", "connect_keyResult_id", {
-//   type: Sequelize.INTEGER,
+// sequelize.queryInterface.addColumn("okr_targets", "memo", {
+//   type: Sequelize.STRING,
 //   allowNull: true,
 //   unique: false,
 // });

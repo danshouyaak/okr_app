@@ -43,4 +43,6 @@ export const reqDeleteResult = (id) =>
 
 // 主页中间 进行中的添加
 export const reqGoingAdd = (params) =>
-    httpGet({url: "/admin/going/target", method: "get", params});
+    httpGet({url: "/admin/going/addTarget", method: "get", params});
+export const reqGoingList = () =>
+    httpGet({url: "/admin/going/getGoingTargetList", method: "get"});

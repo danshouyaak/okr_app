@@ -27,7 +27,7 @@
       <div class="underway-item">
         <div
             class="item"
-            v-for="(item, index) in state.resAdd"
+            v-for="(item, index) in state.goingList"
             :key="item.id"
             :class="{
             'underway-item-active': index === selectTemp,
@@ -35,7 +35,7 @@
             @click="selectItem(index, item)"
         >
           <!-- <div v-for="item in state.resAdd" :key="item.id">{{ item.target_content }}</div> -->
-          <div>{{ item.target_content }}</div>
+          <div>{{ item.key_result_content }}</div>
           <div>🗓️2024/1/6 ~ 2024/2/6</div>
           <el-progress :percentage="percentage1" :color="customColor1"/>
           <hr/>
@@ -46,20 +46,24 @@
 </template>
 
 <script setup>
-import {ref, onBeforeMount} from "vue";
-import {useGetTarget} from "@/hooks/useGetTarget.js";
+import {ref, onBeforeMount, reactive} from "vue";
+import {useGoing} from "@/hooks/useGoing.js";
 
-const {state, getTargetList} = useGetTarget();
+const {getGoingTargetList, state} = useGoing();
+
 onBeforeMount(() => {
-  getTargetList();
+  getGoingTargetList();
 });
 const percentage1 = ref(9);
 const customColor1 = ref("#409eff");
 const selectTemp = ref(0);
+
 const selectItem = (index, item) => {
   selectTemp.value = index;
-  console.log(item.target_content);
+  state.leftTempRes = item;
+  console.log(state.goingList[0]);
 };
+// getGoingTargetList
 </script>
 
 <style lang="scss" scoped>
@@ -118,6 +122,7 @@ const selectItem = (index, item) => {
 
 .underway-item-active {
   background-color: black;
+  transition: all 0.8s;
 }
 
 .underway-item {

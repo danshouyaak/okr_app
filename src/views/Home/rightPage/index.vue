@@ -68,14 +68,25 @@
         备忘
       </div>
       <div class="memo-content">
-        <textarea placeholder="备忘"></textarea>
+        <div class="textarea" placeholder="备忘">
+          {{
+            state.leftTempRes.okr_target
+                ? state.leftTempRes.okr_target.memo
+                : "备忘"
+          }}
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+import {reactive} from "vue";
 const format = (percentage) => (percentage === 100 ? "Full" : `${percentage}%`);
+import {useGoing} from "@/hooks/useGoing.js";
+
+const {state} = useGoing();
+const tempList = reactive(state.leftTempRes);
 </script>
 
 <style lang="scss" scoped>
@@ -229,7 +240,7 @@ const format = (percentage) => (percentage === 100 ? "Full" : `${percentage}%`);
 }
 
 .memo-content {
-  textarea {
+  .textarea {
     width: 93%;
     border: none;
     border-radius: 10px;

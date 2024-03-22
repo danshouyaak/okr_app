@@ -1,5 +1,5 @@
 const {Sequelize, sequelize} = require("../init");
-
+const {Target} = require("../../database/model/Target");
 // 定义模型
 const KeyResult = sequelize.define("okr_key_result", {
     key_result_content: {
@@ -28,6 +28,10 @@ const KeyResult = sequelize.define("okr_key_result", {
 //     unique: false,
 //   },
 // );
+KeyResult.belongsTo(Target, {
+    foreignKey: "connect_okr_targets_id",
+    targetKey: "id",
+});
 KeyResult.sync().then(() => {
     console.log("同步模型成功");
 });

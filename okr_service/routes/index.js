@@ -55,5 +55,8 @@ router.delete(
 );
 
 // 主页中间 进行中的添加
-router.get("/admin/going/target", require("./Going/addGoing"));
+router.get("/admin/going/addTarget", require("./Going/addGoing"));
+
+// 主页中间 进行中的列表集合
+router.get("/admin/going/getGoingTargetList", require("./Going/getGoingList"));
 module.exports = router;

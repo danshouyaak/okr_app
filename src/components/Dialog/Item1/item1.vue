@@ -41,7 +41,7 @@
       <span>用简短的一句话描述目标，不包含量化的数字</span>
       <span>如：让自己变得跟健康</span>
       <div class="resAdd">
-        <div
+        <!-- <div
           style="margin-top: 1%; margin-bottom: 1%"
           v-for="(item, index) in state.resAdd"
           :key="item.id"
@@ -56,9 +56,9 @@
                 </button>
               </div>
             </div>
-            <hr v-if="index !== state.resAdd.length - 1"/>
+            <hr v-if="index !== state.resAdd.length - 1" />
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <div style="margin-top: 5%; display: flex; flex-direction: column">
@@ -100,7 +100,8 @@
       </div>
     </div>
     <div class="memo">
-      <span>备忘</span>
+      <div style="color: black">备忘</div>
+      <textarea placeholder="备忘"></textarea>
     </div>
   </div>
 
@@ -136,7 +137,7 @@ const radioValue = ref(false);
 const value1 = ref(true);
 onBeforeMount(() => {
   if (getToken()) {
-    getTargetList();
+    // getTargetList();
   }
 });
 onMounted(() => {
@@ -298,5 +299,17 @@ const handleClose = () => {
 
 .memo {
   margin-top: 10%;
+
+  textarea {
+    width: 95%;
+    height: 200px;
+    border-radius: 10px;
+    outline: none;
+    background-color: rgba(0, 0, 0, 0.242);
+    padding-left: 2%;
+    padding-top: 2%;
+    resize: none;
+    border: none;
+  }
 }
 </style>

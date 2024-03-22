@@ -8,7 +8,7 @@
         <span class="label">点击新建</span>
       </button>
     </div>
-    <div class="newRes">
+    <!-- <div class="newRes">
       <div v-for="(item, index) in state.keyResultList" :key="index">
         <div style="display: flex; align-items: center; height: 50px">
           <div style="flex: 9">{{ item.key_result_content }}</div>
@@ -18,7 +18,7 @@
         </div>
         <hr v-if="index !== state.keyResultList.length - 1"/>
       </div>
-    </div>
+    </div> -->
     <div class="moresetting">
       <div style="font-size: 10px; text-align: left">更多设置</div>
       <div style="">
