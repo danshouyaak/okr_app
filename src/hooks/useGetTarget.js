@@ -6,6 +6,7 @@ let state = reactive({
     resAdd: [],
     keyResultList: [], // useKeyRes
 });
+let memo = ref(""); // 备忘
 // useKeyRes
 const newResultValue = ref("");
 export const useGetTarget = () => {
@@ -20,6 +21,7 @@ export const useGetTarget = () => {
         inp1,
         state,
         getTargetList,
+        memo,
     };
 };
 export const useKeyRes = () => {

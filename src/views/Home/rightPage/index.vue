@@ -86,7 +86,6 @@ const format = (percentage) => (percentage === 100 ? "Full" : `${percentage}%`);
 import {useGoing} from "@/hooks/useGoing.js";
 
 const {state} = useGoing();
-const tempList = reactive(state.leftTempRes);
 </script>
 
 <style lang="scss" scoped>

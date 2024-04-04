@@ -61,7 +61,6 @@ const selectTemp = ref(0);
 const selectItem = (index, item) => {
   selectTemp.value = index;
   state.leftTempRes = item;
-  console.log(state.goingList[0]);
 };
 // getGoingTargetList
 </script>

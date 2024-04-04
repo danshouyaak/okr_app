@@ -27,11 +27,14 @@ export const useLogin = () => {
         let res = [];
         const data = {username: userName.value, password: userPwd.value};
         res = await reqUserLogin(data);
-        // console.log(res);
-        ElMessage({
-            message: "登录成功",
-            type: "success",
-        });
+        console.log(res);
+        let tempType = ref([]);
+        if (res.meta.msg !== "登录成功") {
+            ElMessage.error(res.meta.msg);
+            loadings.listLoading = false;
+            return;
+        }
+        ElMessage.success(res.meta.msg);
         const token = res.data[0].token;
         setToken(token);
         // loadings.listLoading = false

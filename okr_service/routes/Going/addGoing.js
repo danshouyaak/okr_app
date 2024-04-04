@@ -3,13 +3,14 @@ const {KeyResult} = require("../../database/model/KeyReslut");
 module.exports = async (req, res) => {
     let addValue = req.query.addValue;
     const userId = req.decoded.userId;
+    const memo = req.query.memo;
+
     let createTargtAddValue = await Target.create({
         target_content: addValue,
         user_id: userId,
+        memo: memo,
     });
     const connectOkrTargetsId = createTargtAddValue.id;
-
-    console.log("connectOkrTargetsId", connectOkrTargetsId);
 
     const newAddKeyRes = req.query.keyRes;
     let createKeyAddValue = await KeyResult.create({
@@ -17,17 +18,6 @@ module.exports = async (req, res) => {
         user_id: userId,
         connect_okr_targets_id: connectOkrTargetsId,
     });
-
-    // if (!createKeyAddValue) {
-    //   res.status(400).send({
-    //     meta: {
-    //       status: 400,
-    //       msg: "添加失败",
-    //     },
-    //     data: null,
-    //   });
-    //   return;
-    // }
     res.status(200).send({
         data: {createTargtAddValue, createKeyAddValue},
         meta: {

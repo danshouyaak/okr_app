@@ -18,18 +18,36 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-let curDate = ref("");
+import {ref, reactive, onBeforeMount, defineEmits, watch} from "vue";
+
+let curDate1 = ref("");
 function getCurrentDate() {
   const date = new Date();
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0"); // padStart(获取字符串的最小长度，不够长度补充)
   const day = String(date.getDate()).padStart(2, "0");
-  curDate.value = `${year}-${month}-${day}`;
+  curDate1.value = `${year}-${month}-${day}`;
 }
-onMounted(getCurrentDate);
 
-const value = ref(curDate);
+onBeforeMount(() => {
+  getCurrentDate();
+  startTime();
+  endTime();
+});
+// 监听日期改变
+watch(curDate1, (newValue, oldValue) => {
+  startTime();
+  endTime();
+});
+const emit = defineEmits(["startTime", "endTime"]);
+const startTime = () => {
+  emit("startTime", curDate1);
+};
+const endTime = () => {
+  emit("endTime", curDate1);
+};
+
+const value = ref(curDate1);
 const holidays = [
   "2021-10-01",
   "2021-10-02",
@@ -43,6 +61,7 @@ const holidays = [
 const isHoliday = ({ dayjs }) => {
   return holidays.includes(dayjs.format("YYYY-MM-DD"));
 };
+defineExpose({curDate1});
 </script>
 
 <style lang="scss" scoped>

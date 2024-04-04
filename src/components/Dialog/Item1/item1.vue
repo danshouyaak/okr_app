@@ -40,26 +40,7 @@
     >
       <span>用简短的一句话描述目标，不包含量化的数字</span>
       <span>如：让自己变得跟健康</span>
-      <div class="resAdd">
-        <!-- <div
-          style="margin-top: 1%; margin-bottom: 1%"
-          v-for="(item, index) in state.resAdd"
-          :key="item.id"
-        >
-          <div>
-            <div class="resAdd-item">
-              <span>{{ item.target_content }}</span>
-              <div>
-                <span>{{ item.createdAt.split("T")[0] }}</span>
-                <button style="outline: none" @click="deleteResItem(item.id)">
-                  删除
-                </button>
-              </div>
-            </div>
-            <hr v-if="index !== state.resAdd.length - 1" />
-          </div>
-        </div> -->
-      </div>
+      <div class="resAdd"></div>
     </div>
     <div style="margin-top: 5%; display: flex; flex-direction: column">
       <span style="text-align: left; margin-left: 2%">目标节点</span>
@@ -76,7 +57,7 @@
         <input type="radio" />
       </div>
     </div>
-    <div class="plan">
+    <div class="plan" style="transition: all 1s">
       <div style="text-align: left; margin: 2%">计划</div>
       <div style="background-color: gray; border-radius: 10px">
         <div class="plan1">
@@ -88,20 +69,20 @@
           <div class="plan1">
             <span>开始日期</span>
             <!--  -->
-            <curDate></curDate>
+            <curDate @startTime="startTime"></curDate>
             <!--  -->
           </div>
           <hr />
           <div class="plan1">
             <span>结束日期</span>
-            <curDate></curDate>
+            <curDate @endTime="endTime"></curDate>
           </div>
         </div>
       </div>
     </div>
     <div class="memo">
       <div style="color: black">备忘</div>
-      <textarea placeholder="备忘"></textarea>
+      <textarea placeholder="备忘" v-model="memo"></textarea>
     </div>
   </div>
 
@@ -122,7 +103,7 @@
 </template>
 
 <script setup name="Item1">
-import {ref, onBeforeMount, onMounted} from "vue";
+import {ref, onMounted} from "vue";
 import {ElMessage, ElMessageBox} from "element-plus";
 import curDate from "../../Date/index.vue";
 import {reqAddTarget, reqDeleteTarget} from "@/api/index";
@@ -130,18 +111,30 @@ import {getToken} from "@/utils/token";
 
 import {useGetTarget} from "@/hooks/useGetTarget.js";
 
-const {inp1, state, getTargetList} = useGetTarget();
+const {inp1, state, memo, getTargetList} = useGetTarget();
 
 let id = ref(null);
 const radioValue = ref(false);
-const value1 = ref(true);
-onBeforeMount(() => {
+const value1 = ref(false);
+let sTime = ref(""); // 开始时间
+let eTime = ref(""); // 结束时间
+
+onMounted(() => {
   if (getToken()) {
     // getTargetList();
   }
 });
+const startTime = (value) => {
+  sTime.value = value.value;
+  console.log("startTime", sTime.value);
+};
+const endTime = (value) => {
+  eTime.value = value.value;
+  console.log("endTime", eTime.value);
+};
 onMounted(() => {
 });
+
 // 点击添加的函数
 function enterInp1() {
   if (!inp1.value.trim()) {

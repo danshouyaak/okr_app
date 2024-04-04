@@ -12,10 +12,10 @@ module.exports = async (req, res) => {
 
     const findUser = await User.findOne({where: {username}});
     if (!findUser) {
-        res.status(400).send({
+        res.status(200).send({
             meta: {
                 msg: "用户名不存在",
-                status: 400,
+                status: 200,
             },
             data: null,
         });
@@ -24,10 +24,10 @@ module.exports = async (req, res) => {
 
     //   判断账号密码是否正确
     if (username !== findUser.username || password !== findUser.password) {
-        res.status(400).send({
+        res.status(200).send({
             meta: {
                 msg: "账号或密码不正确",
-                status: 400,
+                status: 200,
             },
             data: null,
         });
@@ -64,6 +64,10 @@ module.exports = async (req, res) => {
         accessToken.token = token;
         res.send({
             status: "sucess",
+            meta: {
+                msg: "登录成功",
+                status: 200,
+            },
             data: [accessToken],
         });
     });
