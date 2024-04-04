@@ -3,6 +3,7 @@ import {reqUserLogin, reqUserRegister} from "@/api/index";
 import {ElMessage} from "element-plus";
 import {setToken} from "@/utils/token";
 import {useRouter} from "vue-router";
+import {LOGINERROR} from "@/constant.js";
 
 let userName = ref("");
 let userPwd = ref("");
@@ -16,6 +17,7 @@ export const useLogin = () => {
     const loginUser = () => {
         if (!userName.value.trim() || !userPwd.value.trim()) {
             //   centerDialogVisible.value = false;
+            ElMessage.error(LOGINERROR);
             return;
         }
         loadings.listLoading = true;
