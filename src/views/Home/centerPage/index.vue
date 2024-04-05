@@ -2,7 +2,7 @@
   <div class="all">
     <div class="top">
       <img src="../../../assets/list.png" width="25px" height="25px"/>
-      <span>+</span>
+      <Dialog></Dialog>
     </div>
     <div class="allTar">
       <img src="../../../assets/tar.png" width="30px" height="30px"/>
@@ -46,6 +46,7 @@
 </template>
 
 <script setup>
+import Dialog from "@/components/Dialog/index.vue";
 import {ref, onBeforeMount, reactive} from "vue";
 import {useGoing} from "@/hooks/useGoing.js";
 
@@ -62,7 +63,6 @@ const selectItem = (index, item) => {
   selectTemp.value = index;
   state.leftTempRes = item;
 };
-// getGoingTargetList
 </script>
 
 <style lang="scss" scoped>
