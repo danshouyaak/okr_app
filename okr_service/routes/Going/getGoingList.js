@@ -10,11 +10,17 @@ module.exports = async (req, res) => {
         include: [
             {
                 model: Target,
-                attributes: ["target_content", "memo", "id", "user_id"],
+                attributes: [
+                    "target_content",
+                    "memo",
+                    "id",
+                    "user_id",
+                    "start_time",
+                    "end_time",
+                ],
             },
         ],
         // raw: true,
     });
-
     res.status(200).send(targetFindAllList);
 };

@@ -4,11 +4,15 @@ module.exports = async (req, res) => {
     let addValue = req.query.addValue;
     const userId = req.decoded.userId;
     const memo = req.query.memo;
+    const st = req.query.startTime;
+    const et = req.query.endTime;
 
     let createTargtAddValue = await Target.create({
         target_content: addValue,
         user_id: userId,
         memo: memo,
+        start_time: st,
+        end_time: et,
     });
     const connectOkrTargetsId = createTargtAddValue.id;
 

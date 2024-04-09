@@ -36,7 +36,12 @@
         >
           <!-- <div v-for="item in state.resAdd" :key="item.id">{{ item.target_content }}</div> -->
           <div>{{ item.key_result_content }}</div>
-          <div>🗓️2024/1/6 ~ 2024/2/6</div>
+          <!-- <div>🗓️2024/1/6 ~ 2024/2/6</div> -->
+          <div>
+            🗓️{{ item.okr_target.start_time || "未设置" }}~{{
+              item.okr_target.end_time || "未设置"
+            }}
+          </div>
           <el-progress :percentage="percentage1" :color="customColor1"/>
           <hr/>
         </div>
@@ -47,13 +52,14 @@
 
 <script setup>
 import Dialog from "@/components/Dialog/index.vue";
-import {ref, onBeforeMount, reactive} from "vue";
+import {ref, onMounted, reactive} from "vue";
 import {useGoing} from "@/hooks/useGoing.js";
 
 const {getGoingTargetList, state} = useGoing();
 
-onBeforeMount(() => {
+onMounted(() => {
   getGoingTargetList();
+  // console.log(state.goingList);
 });
 const percentage1 = ref(9);
 const customColor1 = ref("#409eff");

@@ -41,7 +41,7 @@ import Item2 from "./Item2/item2.vue";
 import Item3 from "./Item3/item3.vue";
 import {useGetTarget, useKeyRes} from "@/hooks/useGetTarget.js";
 
-const {inp1, getTargetList, memo} = useGetTarget();
+const {inp1, getTargetList, memo, sTime, eTime} = useGetTarget();
 const {newResultValue} = useKeyRes();
 import {reqGoingAdd} from "@/api/index.js";
 import {ElMessage} from "element-plus";
@@ -56,6 +56,8 @@ const closeDialog = () => {
 // reqGoingAdd
 async function addGoingAdd() {
   let data = {
+    startTime: sTime.value,
+    endTime: eTime.value,
     addValue: inp1.value,
     keyRes: newResultValue.value,
     memo: memo.value,

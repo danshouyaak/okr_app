@@ -18,6 +18,16 @@ const Target = sequelize.define("okr_targets", {
         allowNull: true,
         unique: false,
     },
+    start_time: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        unique: false,
+    },
+    end_time: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        unique: false,
+    },
 });
 
 // 新建数数据库字段 connect_keyResult_id

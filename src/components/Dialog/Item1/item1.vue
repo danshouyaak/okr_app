@@ -111,13 +111,13 @@ import {getToken} from "@/utils/token";
 
 import {useGetTarget} from "@/hooks/useGetTarget.js";
 
-const {inp1, state, memo, getTargetList} = useGetTarget();
+const {inp1, state, sTime, eTime, memo, getTargetList} = useGetTarget();
 
 let id = ref(null);
 const radioValue = ref(false);
 const value1 = ref(false);
-let sTime = ref(""); // 开始时间
-let eTime = ref(""); // 结束时间
+// let sTime = ref(""); // 开始时间
+// let eTime = ref(""); // 结束时间
 
 onMounted(() => {
   if (getToken()) {
@@ -125,12 +125,10 @@ onMounted(() => {
   }
 });
 const startTime = (value) => {
-  sTime.value = value.value;
-  console.log("startTime", sTime.value);
+  sTime.value = value.value.replace(/-/g, "/");
 };
 const endTime = (value) => {
-  eTime.value = value.value;
-  console.log("endTime", eTime.value);
+  eTime.value = value.value.replace(/-/g, "/");
 };
 onMounted(() => {
 });

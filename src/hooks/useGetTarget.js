@@ -2,6 +2,8 @@ import {ref, reactive} from "vue";
 import {reqGetTargetList} from "@/api/index";
 // useGetTarget
 let inp1 = ref("");
+let sTime = ref(""); // 开始时间
+let eTime = ref(""); // 结束时间
 let state = reactive({
     resAdd: [],
     keyResultList: [], // useKeyRes
@@ -22,6 +24,8 @@ export const useGetTarget = () => {
         state,
         getTargetList,
         memo,
+        sTime,
+        eTime,
     };
 };
 export const useKeyRes = () => {
